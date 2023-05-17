@@ -12,3 +12,24 @@ html {
 body {
   background: #f2f2f2;
 }
+
+.hidden {
+  display: none;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+form button {
+  cursor: pointer;
+}
