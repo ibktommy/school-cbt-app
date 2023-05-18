@@ -103,7 +103,7 @@ formBtn.addEventListener("click", (e) => {
 
 	form.classList.add("hidden");
 	testBody.classList.remove("hidden");
-	welcomeNote.textContent = `Hello there, ${usernameValue}. Welcome to Computer Based Test App`;
+	welcomeNote.innerHTML = `Hello there, <b>${usernameValue}</b>.<br> Welcome to Computer Based Test App`;
 	timer = setInterval(startTimer, 1000);
 
 	usernameValue = "";
