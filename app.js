@@ -13,6 +13,20 @@ let timer;
 let minutes = 4;
 let seconds = 59;
 
+let subjects = document.querySelectorAll('.subject')
+
+// Event Listener on the Subject Clicked
+for (let i = 0; i < subjects.length; i++) {
+  subjects[i].addEventListener('click', () => {
+    for(let j = 0; j < subjects.length; j++) {
+      subjects[j].classList.remove('clicked')
+      subjects[i].classList.add('clicked')
+    }
+  })
+}
+
+
+// Event Listener on the Form Button
 formBtn.addEventListener('click', (e) => {
   e.preventDefault()
   let usernameValue = username.value
@@ -30,6 +44,8 @@ formBtn.addEventListener('click', (e) => {
 
 });
 
+
+// Start Timer Function
 function startTimer () {
   seconds = seconds - 1;
 
