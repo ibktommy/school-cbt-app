@@ -3,7 +3,7 @@
 		subject: "General Knowledge",
 		questions: [
 			{
-				id: 1,
+				id: 0,
 				question: "Which country is regarded as the 'Giant of Africa'?",
 				optionA: "Egypt",
 				optionB: "Kenya",
@@ -13,7 +13,7 @@
 			},
 
 			{
-				id: 2,
+				id: 1,
 				question: "What is the capital state of Russia?",
 				optionA: "Kremlin",
 				optionB: "Saint Petersburg",
@@ -23,7 +23,7 @@
 			},
 
 			{
-				id: 3,
+				id: 2,
 				question: "Who is the first man to step foot on the moon?",
 				optionA: "Yuri Gaganrin",
 				optionB: "Neil Armstrong",
@@ -33,7 +33,7 @@
 			},
 
 			{
-				id: 4,
+				id: 3,
 				question: "What year did World War 2 ended?",
 				optionA: "1945",
 				optionB: "1948",
@@ -43,7 +43,7 @@
 			},
 
 			{
-				id: 5,
+				id: 4,
 				question: "Which of this countries is a world nuclear superpower",
 				optionA: "South Africa",
 				optionB: "Russia",
@@ -58,7 +58,7 @@
 		subject: "Biology",
 		questions: [
 			{
-				id: 1,
+				id: 0,
 				question: "The father of Zoology is?",
 				optionA: "Aristotle",
 				optionB: "Linnaeus",
@@ -68,7 +68,7 @@
 			},
 
 			{
-				id: 2,
+				id: 1,
 				question: "Throughout the world, official soecies names are in?",
 				optionA: "Latin",
 				optionB: "Greek",
@@ -78,7 +78,7 @@
 			},
 
 			{
-				id: 3,
+				id: 2,
 				question: "Trypanosomiasis is transmitted by?",
 				optionA: "Mosquitoes",
 				optionB: "Glossina",
@@ -88,7 +88,7 @@
 			},
 
 			{
-				id: 4,
+				id: 3,
 				question: "Who suggested that 'All plants are made of cells'?",
 				optionA: "Hooke",
 				optionB: "Schwann",
@@ -98,7 +98,7 @@
 			},
 
 			{
-				id: 5,
+				id: 4,
 				question: "The interaction of living and non-living things is termed?",
 				optionA: "Enviromental Biology",
 				optionB: "Ecology",
@@ -112,7 +112,7 @@
 		subject: "Mathematics",
 		questions: [
 			{
-				id: 1,
+				id: 0,
 				question: "What is the next Prime number after 13?",
 				optionA: "14",
 				optionB: "19",
@@ -122,7 +122,7 @@
 			},
 
 			{
-				id: 2,
+				id: 1,
 				question: "1,8,15,22,29,36,... is?",
 				optionA: "G.P",
 				optionB: "Arithmetic Series",
@@ -132,7 +132,7 @@
 			},
 
 			{
-				id: 3,
+				id: 2,
 				question: "Every even integer is also a/an ?",
 				optionA: "Natural number",
 				optionB: "Rational number",
@@ -142,7 +142,7 @@
 			},
 
 			{
-				id: 4,
+				id: 3,
 				question: "The set {{1, 2, 3}, {4, 5}} has how many elements?",
 				optionA: "2",
 				optionB: "Infinite",
@@ -152,7 +152,7 @@
 			},
 
 			{
-				id: 5,
+				id: 4,
 				question: "Solve 3 + 6 x ( 5 + 4 ) / 3 - 7",
 				optionA: "14",
 				optionB: "16",

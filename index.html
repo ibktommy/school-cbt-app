@@ -9,7 +9,7 @@
 </head>
 <body>
   <div class="container">
-    <form hidden>
+    <form>
       <div class="form-input">
         <label for="name">Enter your username</label>
         <input type="text" id="name">
@@ -24,41 +24,14 @@
         <span>:</span>
         <span class="time-seconds">00</span>
       </div>
-    </div>
 
-    <div class="subjects">
-      <p id="his" class="subject clicked" data-num="0">General Knowledge</p>
-      <p id="mat" class="subject" data-num="1">Mathematics</p>
-      <p id="bio" class="subject" data-num="2">Biology</p>
-    </div>
+      <div class="subjects hidden">
+        <p id="his" class="subject" data-title="General Knowledge">General Knowledge</p>
+        <p id="mat" class="subject" data-title="Mathematics">Mathematics</p>
+        <p id="bio" class="subject" data-title="Biology">Biology</p>
+      </div>
 
-    <div class="questions">
-      <article class="question-type">
-        <div class="question-content">
-          <p class="question-num">[1].</p>
-          <p class="question-text">What is my name?</p>
-        </div>
-
-        <div class="question-options">
-          <div class="optionA">
-            <div class="option-box"></div>
-            <p class="option-text">Tom</p>
-          </div>
-          <div class="optionB">
-            <div class="option-box"></div>
-            <p class="option-text">Cat</p>
-          </div>
-          <div class="optionC">
-            <div class="option-box"></div>
-            <p class="option-text">Dave</p>
-          </div>
-          <div class="optionD">
-            <div class="option-box"></div>
-            <p class="option-text">Cynthia</p>
-          </div>
-          
-        </div>
-      </article>
+      <div class="questions hidden"></div>
     </div>
   </div>
 
