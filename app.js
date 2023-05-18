@@ -15,6 +15,19 @@ let seconds = 59;
 
 let subjects = document.querySelectorAll('.subject')
 
+let optionsBox = document.querySelectorAll(".option-box");
+
+
+// Event Listener on the Options Box
+for (let i = 0; i < optionsBox.length; i++) {
+	optionsBox[i].addEventListener("click", () => {
+		for (let j = 0; j < optionsBox.length; j++) {
+			optionsBox[j].style.backgroundColor = "#fff";
+			optionsBox[i].style.backgroundColor = "#000";
+		}
+	});
+}
+
 // Event Listener on the Subject Clicked
 for (let i = 0; i < subjects.length; i++) {
   subjects[i].addEventListener('click', () => {
@@ -24,6 +37,11 @@ for (let i = 0; i < subjects.length; i++) {
     }
   })
 }
+
+// Display Question Function
+// function displayQuestions () {
+
+// }
 
 
 // Event Listener on the Form Button
