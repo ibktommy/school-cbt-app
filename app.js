@@ -52,8 +52,6 @@ function displayQuestions(subjectInView) {
 		if (subjectInView === subjectTitle) {
 			let subjectQuestions = subjectData.questions;
 
-			console.log(subjectQuestions[questionNumber]);
-
 			const { id, question, optionA, optionB, optionC, optionD } =
 				subjectQuestions[questionNumber];
 

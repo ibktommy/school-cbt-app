@@ -34,7 +34,25 @@ form button {
   cursor: pointer;
 }
 
+.time-box {
+  margin: 2rem 0;
+  background: red;
+  color: #fff;
+  width: 10rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.time-box > * {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 .subjects {
+  margin: 3rem 0 5rem 0;
   display: flex;
 }
 
