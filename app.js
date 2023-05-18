@@ -96,7 +96,7 @@ function displayQuestions(subjectInView) {
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
 	e.preventDefault();
-	let usernameValue = username.value;
+	let usernameValue = username.value.trim();
 
 	if (usernameValue === undefined || usernameValue === "") {
 		alert("Please Enter Your Username!");
