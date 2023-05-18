@@ -131,3 +131,30 @@ form button {
   font-size: 1.2rem;
 }
 
+.subject-questions-number {
+  margin-top: 2rem;
+  border: .1rem solid #000;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.number-box {
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.6rem;
+  line-height: 3rem;
+  font-weight: bold;
+  background: transparent;
+  color: #000;
+  text-align: center;
+  margin: 1rem;
+  border: .1rem solid #000;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+
+.number-box.clicked {
+  border: 0;
+  background: green;
+  color: #fff;
+}

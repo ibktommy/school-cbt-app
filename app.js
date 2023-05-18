@@ -18,6 +18,21 @@ let subjects = document.querySelectorAll('.subject')
 let questions = document.querySelector(".questions");
 let questionNumber = 0;
 
+let subjectQuestionBox = document.querySelector(".subject-questions-number ");
+let questionNumberBox = document.querySelectorAll(".number-box");
+
+console.log(subjectQuestionBox, questionNumberBox);
+
+// Event Listener on the questionNumberBox clicked
+for (let i = 0; i < questionNumberBox.length; i++) {
+	questionNumberBox[i].addEventListener("click", () => {
+		for (let j = 0; j < questionNumberBox.length; j++) {
+			questionNumberBox[j].classList.remove("clicked");
+			questionNumberBox[i].classList.add("clicked");
+		}
+	});
+}
+
 //Event Listener on the Subject Clicked
 for (let i = 0; i < subjects.length; i++) {
 	subjects[i].addEventListener("click", () => {
