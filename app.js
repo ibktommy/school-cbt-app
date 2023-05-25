@@ -37,7 +37,7 @@ formBtn.addEventListener("click", (e) => {
 	fetchSubjectsTabTitle();
 	// fetchSubjectsQuestion();
 
-	// Adding event Listener on each Subject-tab
+	// Adding event Listener on each Subject-tab that calls fetchSubjectsQuestion function
 	let subjectTabButtons = document.querySelectorAll(
 		".subjects-tab-container button",
 	);
@@ -101,6 +101,8 @@ function fetchSubjectsTabTitle() {
 
 // Fetch Subjects Question
 function fetchSubjectsQuestion(subject) {
+	questionContainer.innerHTML = ""; //resetting the questionContainer each time the function is called
+	
 	let subjectQuestions = quizData[subject].questions;
 
 	subjectQuestions.forEach((eachSubjectQuestion) => {
