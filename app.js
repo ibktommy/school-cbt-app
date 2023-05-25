@@ -43,7 +43,7 @@ formBtn.addEventListener("click", (e) => {
 	);
 
 	subjectTabButtons.forEach((eachTabButton, index) => {
-		fetchSubjectsQuestion(index - index);
+		fetchSubjectsQuestion(index - index); //Calls fetchSubjectsQuestion with an initial argument of 0
 		eachTabButton.addEventListener("click", () => {
 			fetchSubjectsQuestion(index);
 		});
