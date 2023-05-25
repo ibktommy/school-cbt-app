@@ -43,7 +43,7 @@ formBtn.addEventListener("click", (e) => {
 	);
 
 	subjectTabButtons.forEach((eachTabButton, index) => {
-		console.log(index);
+		fetchSubjectsQuestion(index - index);
 		eachTabButton.addEventListener("click", () => {
 			fetchSubjectsQuestion(index);
 		});
@@ -102,7 +102,7 @@ function fetchSubjectsTabTitle() {
 // Fetch Subjects Question
 function fetchSubjectsQuestion(subject) {
 	questionContainer.innerHTML = ""; //resetting the questionContainer each time the function is called
-	
+
 	let subjectQuestions = quizData[subject].questions;
 
 	subjectQuestions.forEach((eachSubjectQuestion) => {
