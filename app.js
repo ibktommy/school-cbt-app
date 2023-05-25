@@ -15,6 +15,8 @@ let minutes = 4;
 let seconds = 59;
 
 let subjectsTabContainer = document.querySelector(".subjects-tab-container");
+let questionContainer = document.querySelector(".question-container");
+// let quizObjectNumber = 2;
 
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
@@ -33,6 +35,7 @@ formBtn.addEventListener("click", (e) => {
 	timer = setInterval(startTimer, 1000);
 
 	fetchSubjectsTabTitle();
+	fetchSubjectsQuestion();
 });
 
 // Start Timer Function
@@ -58,7 +61,7 @@ function startTimer() {
 	}
 }
 
-//Fetch subjects Title from Data file
+// Fetch subjects Title from Data file
 function fetchSubjectsTabTitle() {
 	quizData.forEach((quizObject) => {
 		// console.log(quizObject.subject);
@@ -82,4 +85,44 @@ function fetchSubjectsTabTitle() {
 			}
 		});
 	}
+}
+
+// Fetch Subjects Question
+function fetchSubjectsQuestion(subject) {
+	let subjectQuestions = quizData[0].questions;
+
+	subjectQuestions.forEach((eachSubjectQuestion) => {
+		const { id, question, optionA, optionB, optionC, optionD } =
+			eachSubjectQuestion;
+		let questionContent = document.createElement("div");
+
+		questionContent.innerHTML = `
+			<article class="question">
+					<div class="question-details">
+						<p>Q.[${id}]</p>
+						<p>${question}</p>
+					</div>
+					<div class="question-options">
+						<div class="question-options-details clicked">
+							<span></span>
+							<span>${optionA}</span>
+						</div>
+						<div class="question-options-details">
+							<span></span>
+							<span>${optionB}</span>
+						</div>
+						<div class="question-options-details">
+							<span></span>
+							<span>${optionC}</span>
+						</div>
+						<div class="question-options-details">
+							<span></span>
+							<span>${optionD}</span>
+						</div>
+					</div>
+				</article>
+		`;
+
+		questionContainer.append(questionContent);
+	});
 }
