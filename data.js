@@ -1,4 +1,4 @@
- export const testData = [
+ export const quizData = [
 		{
 			subject: "General Knowledge",
 			questions: [

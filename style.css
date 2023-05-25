@@ -59,102 +59,13 @@ form button {
   font-weight: bold;
 }
 
-.subjects {
-  margin: 3rem 0 5rem 0;
-  display: flex;
-}
-
-.subject {
-  font-size: 1.2rem;
+.subjects-tab-container button {
+  padding: 1rem 1.5rem;
   border: .1rem solid #000;
-  background: #828282;
-  color: #000;
-  padding: 1rem 2.5rem;
   cursor: pointer;
 }
 
-.subject:hover {
-  background: #828282bb;
-}
-
-.subject.clicked {
-  background: #fff;
-  border: 0;
-}
-
-/* .subject:nth-child(2) {
-  margin: 0 2rem;
-} */
-
-.questions {
-  margin-top: 2rem;
-  border: .1rem solid #000;
-  padding: 1.5rem;
-}
-
-.question-content {
-  display: flex;
-  margin-bottom: 1rem;
-  align-items: center;
-}
-
-.question-num {
-  font-size: 1.5rem;
-  margin-right: 1rem;
-}
-
-.question-text {
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
-.question-options {
-  margin-left: 3rem;
-}
-
-.question-options > * {
-  margin-bottom: .7rem;
-  display: flex;
-  align-items: center;
-}
-
-.option-box {
-  width: 1rem;
-  height: 1rem;
-  border: .1rem solid #000;
-  border-radius: 100%;
-  margin-right: .7rem;
-  cursor: pointer;
-}
-
-.option-text {
-  font-size: 1.2rem;
-}
-
-.subject-questions-number {
-  margin-top: 2rem;
-  border: .1rem solid #000;
-  /* display: flex; */
-  flex-wrap: wrap;
-}
-
-.number-box {
-  width: 3rem;
-  height: 3rem;
-  font-size: 1.6rem;
-  line-height: 3rem;
-  font-weight: bold;
-  background: transparent;
-  color: #000;
-  text-align: center;
-  margin: 1rem;
-  border: .1rem solid #000;
-  border-radius: .5rem;
-  cursor: pointer;
-}
-
-.number-box.clicked {
-  border: 0;
-  background: green;
+.subjects-tab-container button.clicked {
+  background: blueviolet;
   color: #fff;
 }

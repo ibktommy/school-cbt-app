@@ -1,4 +1,4 @@
-import { testData } from "./data.js";
+import { quizData } from "./data.js";
 
 // Get HTML tags
 let form = document.querySelector("form");
@@ -14,6 +14,8 @@ let clearTimer;
 let minutes = 4;
 let seconds = 59;
 
+let subjectsTabContainer = document.querySelector(".subjects-tab-container");
+
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
 	e.preventDefault();
@@ -23,13 +25,14 @@ formBtn.addEventListener("click", (e) => {
 		alert("Please Enter Your Username!");
 		return;
 	}
-
+	usernameValue = "";
 	form.classList.add("hidden");
+
 	testBody.classList.remove("hidden");
 	welcomeNote.innerHTML = `Hello there, <b>${usernameValue}</b>.<br> Welcome to Computer Based Test App`;
 	timer = setInterval(startTimer, 1000);
 
-	usernameValue = "";
+	fetchSubjectsTabTitle();
 });
 
 // Start Timer Function
@@ -55,4 +58,28 @@ function startTimer() {
 	}
 }
 
+//Fetch subjects Title from Data file
+function fetchSubjectsTabTitle() {
+	quizData.forEach((quizObject) => {
+		// console.log(quizObject.subject);
+		let subjectTitle = quizObject.subject;
 
+		subjectsTabContainer.innerHTML += `<button>${subjectTitle}</button>`;
+	});
+
+	//Select the subjects Titles and add a class to the first item in the Array
+	let subjectsTitles = document.querySelectorAll(
+		".subjects-tab-container button",
+	);
+	subjectsTitles[0].classList.add("clicked");
+
+	//Add Click event to a subject-title clicked to add class to it and remove from others
+	for (let i = 0; i < subjectsTitles.length; i++) {
+		subjectsTitles[i].addEventListener("click", () => {
+			for (let j = 0; j < subjectsTitles.length; j++) {
+				subjectsTitles[j].classList.remove("clicked");
+				subjectsTitles[i].classList.add("clicked");
+			}
+		});
+	}
+}
