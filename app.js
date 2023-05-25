@@ -35,7 +35,6 @@ formBtn.addEventListener("click", (e) => {
 	timer = setInterval(startTimer, 1000);
 
 	fetchSubjectsTabTitle();
-	// fetchSubjectsQuestion();
 
 	// Adding event Listener on each Subject-tab that calls fetchSubjectsQuestion function
 	let subjectTabButtons = document.querySelectorAll(
@@ -43,7 +42,7 @@ formBtn.addEventListener("click", (e) => {
 	);
 
 	subjectTabButtons.forEach((eachTabButton, index) => {
-		fetchSubjectsQuestion(index - index); //Calls fetchSubjectsQuestion with an initial argument of 0
+		fetchSubjectsQuestion(index - index); // Calls fetchSubjectsQuestion with an initial argument of 0
 		eachTabButton.addEventListener("click", () => {
 			fetchSubjectsQuestion(index);
 		});
@@ -101,7 +100,7 @@ function fetchSubjectsTabTitle() {
 
 // Fetch Subjects Question
 function fetchSubjectsQuestion(subject) {
-	questionContainer.innerHTML = ""; //resetting the questionContainer each time the function is called
+	questionContainer.innerHTML = ""; // Resetting the questionContainer each time the function is called
 
 	let subjectQuestions = quizData[subject].questions;
 
