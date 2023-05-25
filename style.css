@@ -134,7 +134,7 @@ form button {
 .subject-questions-number {
   margin-top: 2rem;
   border: .1rem solid #000;
-  display: flex;
+  /* display: flex; */
   flex-wrap: wrap;
 }
 
