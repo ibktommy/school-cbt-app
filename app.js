@@ -35,7 +35,19 @@ formBtn.addEventListener("click", (e) => {
 	timer = setInterval(startTimer, 1000);
 
 	fetchSubjectsTabTitle();
-	fetchSubjectsQuestion();
+	// fetchSubjectsQuestion();
+
+	// Adding event Listener on each Subject-tab
+	let subjectTabButtons = document.querySelectorAll(
+		".subjects-tab-container button",
+	);
+
+	subjectTabButtons.forEach((eachTabButton, index) => {
+		console.log(index);
+		eachTabButton.addEventListener("click", () => {
+			fetchSubjectsQuestion(index);
+		});
+	});
 });
 
 // Start Timer Function
@@ -89,7 +101,7 @@ function fetchSubjectsTabTitle() {
 
 // Fetch Subjects Question
 function fetchSubjectsQuestion(subject) {
-	let subjectQuestions = quizData[0].questions;
+	let subjectQuestions = quizData[subject].questions;
 
 	subjectQuestions.forEach((eachSubjectQuestion) => {
 		const { id, question, optionA, optionB, optionC, optionD } =
