@@ -111,7 +111,7 @@ function subjectTitleQuestions() {
 }
 
 // Fetch Subjects Question
-function fetchSubjectsQuestion(subject = 0) {
+function fetchSubjectsQuestion(subject) {
 	questionContainer.innerHTML = ""; // Resetting the questionContainer each time the function is called
 
 	let subjectQuestions = quizData[subject].questions;
@@ -173,7 +173,7 @@ function optionCheckbox() {
 }
 
 // Fetch Questions Numbers
-function fetchQuestionNumbers(subject = 0) {
+function fetchQuestionNumbers(subject) {
 	questionNumbersContainer.innerHTML = "";
 	let subjectQuestionsNumber = quizData[subject].questions;
 
