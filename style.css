@@ -147,11 +147,11 @@ form button {
   cursor: pointer;
 }
 
-.question-number p:hover {
+.question-number-container p:hover {
   background-color: rgba(255, 0, 0, 0.6);
 }
 
-.question-number p.clicked {
+.question-number-container p.clicked {
   background-color: #fff;
   color: #000;
   border: .1rem solid #000;

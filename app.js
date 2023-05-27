@@ -41,9 +41,9 @@ formBtn.addEventListener("click", (e) => {
 
 	subjectTitleQuestions();
 
-	optionCheckbox();
+	// optionCheckbox();
 
-	fetchQuestionNumbers();
+	// fetchQuestionNumbers();
 });
 
 // Start Timer Function
@@ -94,6 +94,22 @@ function fetchSubjectsTabTitle() {
 	}
 }
 
+// Event Listener Function on Each Subject-title that calls fetchSubjectsQuestion function
+function subjectTitleQuestions() {
+	let subjectTabButtons = document.querySelectorAll(
+		".subjects-tab-container button",
+	);
+
+	subjectTabButtons.forEach((eachTabButton, index) => {
+		fetchSubjectsQuestion(index - index); // Calls fetchSubjectsQuestion with an initial argument of 0
+		fetchQuestionNumbers(0);
+		eachTabButton.addEventListener("click", () => {
+			fetchSubjectsQuestion(index);
+			fetchQuestionNumbers(index);
+		});
+	});
+}
+
 // Fetch Subjects Question
 function fetchSubjectsQuestion(subject = 0) {
 	questionContainer.innerHTML = ""; // Resetting the questionContainer each time the function is called
@@ -134,22 +150,8 @@ function fetchSubjectsQuestion(subject = 0) {
 		`;
 
 		questionContainer.append(questionContent);
-	});
-}
 
-// Event Listener Function on Each Subject-title that calls fetchSubjectsQuestion function
-function subjectTitleQuestions() {
-	let subjectTabButtons = document.querySelectorAll(
-		".subjects-tab-container button",
-	);
-
-	subjectTabButtons.forEach((eachTabButton, index) => {
-		fetchSubjectsQuestion(index - index); // Calls fetchSubjectsQuestion with an initial argument of 0
-		// fetchQuestionNumbers(0);
-		eachTabButton.addEventListener("click", () => {
-			fetchSubjectsQuestion(index);
-			fetchQuestionNumbers(index);
-		});
+		optionCheckbox();
 	});
 }
 
@@ -181,4 +183,19 @@ function fetchQuestionNumbers(subject = 0) {
 		questionNumberHTML.innerHTML = `${questionNumber}`;
 		questionNumbersContainer.append(questionNumberHTML);
 	});
+
+	// Event Listener on each question Number Button
+	let questionNumbers = document.querySelectorAll(
+		".question-number-container p",
+	);
+
+	// console.log(questionNumbers)
+	for (let i = 0; i < questionNumbers.length; i++) {
+		questionNumbers[i].addEventListener("click", () => {
+			for (let j = 0; j < questionNumbers.length; j++) {
+				questionNumbers[j].classList.remove("clicked");
+				questionNumbers[i].classList.add("clicked");
+			}
+		});
+	}
 }
