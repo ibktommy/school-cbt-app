@@ -17,6 +17,10 @@ let seconds = 59;
 let subjectsTabContainer = document.querySelector(".subjects-tab-container");
 let questionContainer = document.querySelector(".question-container");
 
+let questionNumbersContainer = document.querySelector(
+	".question-number-container",
+);
+
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
 	e.preventDefault();
@@ -38,6 +42,8 @@ formBtn.addEventListener("click", (e) => {
 	subjectTitleQuestions();
 
 	optionCheckbox();
+
+	fetchQuestionNumbers();
 });
 
 // Start Timer Function
@@ -66,7 +72,6 @@ function startTimer() {
 // Fetch subjects Title from Data file
 function fetchSubjectsTabTitle() {
 	quizData.forEach((quizObject) => {
-		// console.log(quizObject.subject);
 		let subjectTitle = quizObject.subject;
 
 		subjectsTabContainer.innerHTML += `<button>${subjectTitle}</button>`;
@@ -90,7 +95,7 @@ function fetchSubjectsTabTitle() {
 }
 
 // Fetch Subjects Question
-function fetchSubjectsQuestion(subject) {
+function fetchSubjectsQuestion(subject = 0) {
 	questionContainer.innerHTML = ""; // Resetting the questionContainer each time the function is called
 
 	let subjectQuestions = quizData[subject].questions;
@@ -140,8 +145,10 @@ function subjectTitleQuestions() {
 
 	subjectTabButtons.forEach((eachTabButton, index) => {
 		fetchSubjectsQuestion(index - index); // Calls fetchSubjectsQuestion with an initial argument of 0
+		// fetchQuestionNumbers(0);
 		eachTabButton.addEventListener("click", () => {
 			fetchSubjectsQuestion(index);
+			fetchQuestionNumbers(index);
 		});
 	});
 }
@@ -161,4 +168,17 @@ function optionCheckbox() {
 			}
 		});
 	}
+}
+
+// Fetch Questions Numbers
+function fetchQuestionNumbers(subject = 0) {
+	questionNumbersContainer.innerHTML = "";
+	let subjectQuestionsNumber = quizData[subject].questions;
+
+	subjectQuestionsNumber.forEach((question) => {
+		let questionNumber = question.id;
+		let questionNumberHTML = document.createElement("p");
+		questionNumberHTML.innerHTML = `${questionNumber}`;
+		questionNumbersContainer.append(questionNumberHTML);
+	});
 }
