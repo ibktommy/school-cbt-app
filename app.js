@@ -16,7 +16,6 @@ let seconds = 59;
 
 let subjectsTabContainer = document.querySelector(".subjects-tab-container");
 let questionContainer = document.querySelector(".question-container");
-// let quizObjectNumber = 2;
 
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
@@ -27,7 +26,7 @@ formBtn.addEventListener("click", (e) => {
 		alert("Please Enter Your Username!");
 		return;
 	}
-	usernameValue = "";
+	// usernameValue = "";
 	form.classList.add("hidden");
 
 	testBody.classList.remove("hidden");
@@ -36,17 +35,9 @@ formBtn.addEventListener("click", (e) => {
 
 	fetchSubjectsTabTitle();
 
-	// Adding event Listener on each Subject-tab that calls fetchSubjectsQuestion function
-	let subjectTabButtons = document.querySelectorAll(
-		".subjects-tab-container button",
-	);
+	subjectTitleQuestions();
 
-	subjectTabButtons.forEach((eachTabButton, index) => {
-		fetchSubjectsQuestion(index - index); // Calls fetchSubjectsQuestion with an initial argument of 0
-		eachTabButton.addEventListener("click", () => {
-			fetchSubjectsQuestion(index);
-		});
-	});
+	optionCheckbox();
 });
 
 // Start Timer Function
@@ -108,6 +99,7 @@ function fetchSubjectsQuestion(subject) {
 		const { id, question, optionA, optionB, optionC, optionD } =
 			eachSubjectQuestion;
 		let questionContent = document.createElement("div");
+		questionContent.classList.add("question-content");
 
 		questionContent.innerHTML = `
 			<article class="question">
@@ -116,20 +108,20 @@ function fetchSubjectsQuestion(subject) {
 						<p>${question}</p>
 					</div>
 					<div class="question-options">
-						<div class="question-options-details clicked">
-							<span></span>
+						<div class="question-options-details">
+							<span class="checkbox"></span>
 							<span>${optionA}</span>
 						</div>
 						<div class="question-options-details">
-							<span></span>
+							<span class="checkbox"></span>
 							<span>${optionB}</span>
 						</div>
 						<div class="question-options-details">
-							<span></span>
+							<span class="checkbox"></span>
 							<span>${optionC}</span>
 						</div>
 						<div class="question-options-details">
-							<span></span>
+							<span class="checkbox"></span>
 							<span>${optionD}</span>
 						</div>
 					</div>
@@ -138,4 +130,35 @@ function fetchSubjectsQuestion(subject) {
 
 		questionContainer.append(questionContent);
 	});
+}
+
+// Event Listener Function on Each Subject-title that calls fetchSubjectsQuestion function
+function subjectTitleQuestions() {
+	let subjectTabButtons = document.querySelectorAll(
+		".subjects-tab-container button",
+	);
+
+	subjectTabButtons.forEach((eachTabButton, index) => {
+		fetchSubjectsQuestion(index - index); // Calls fetchSubjectsQuestion with an initial argument of 0
+		eachTabButton.addEventListener("click", () => {
+			fetchSubjectsQuestion(index);
+		});
+	});
+}
+
+// Event Listener Function for Question-options Checkbox
+function optionCheckbox() {
+	let questionOptionsDetails = document.querySelectorAll(
+		".question-options-details",
+	);
+
+	// console.log(questionOptionsDetails);
+	for (let i = 0; i < questionOptionsDetails.length; i++) {
+		questionOptionsDetails[i].addEventListener("click", () => {
+			for (let j = 0; j < questionOptionsDetails.length; j++) {
+				questionOptionsDetails[j].classList.remove("clicked");
+				questionOptionsDetails[i].classList.add("clicked");
+			}
+		});
+	}
 }
