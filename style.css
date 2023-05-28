@@ -119,6 +119,10 @@ form button {
   border-radius: 50%;
 }
 
+.question-content.hidden {
+  display: none;
+}
+
 .question-options-details span:nth-child(2) {
   font-size: 1.2rem;
 }

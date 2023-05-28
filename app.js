@@ -21,6 +21,7 @@ let questionNumbersContainer = document.querySelector(
 	".question-number-container",
 );
 
+
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
 	e.preventDefault();
@@ -40,10 +41,6 @@ formBtn.addEventListener("click", (e) => {
 	fetchSubjectsTabTitle();
 
 	subjectTitleQuestions();
-
-	// optionCheckbox();
-
-	// fetchQuestionNumbers();
 });
 
 // Start Timer Function
@@ -81,7 +78,7 @@ function fetchSubjectsTabTitle() {
 	let subjectsTitles = document.querySelectorAll(
 		".subjects-tab-container button",
 	);
-	subjectsTitles[0].classList.add("clicked");
+	// subjectsTitles[0].classList.add("clicked");
 
 	//Add Click event to a subject-title clicked to add class to it and remove from others
 	for (let i = 0; i < subjectsTitles.length; i++) {
@@ -101,11 +98,12 @@ function subjectTitleQuestions() {
 	);
 
 	subjectTabButtons.forEach((eachTabButton, index) => {
-		fetchSubjectsQuestion(index - index); // Calls fetchSubjectsQuestion with an initial argument of 0
-		fetchQuestionNumbers(0);
+		// fetchSubjectsQuestion(index - index); // Calls fetchSubjectsQuestion with an initial argument of 0
+		// fetchQuestionNumbers(0);
 		eachTabButton.addEventListener("click", () => {
 			fetchSubjectsQuestion(index);
 			fetchQuestionNumbers(index);
+			displayOneQuestion();
 		});
 	});
 }
@@ -119,6 +117,7 @@ function fetchSubjectsQuestion(subject) {
 	subjectQuestions.forEach((eachSubjectQuestion) => {
 		const { id, question, optionA, optionB, optionC, optionD } =
 			eachSubjectQuestion;
+
 		let questionContent = document.createElement("div");
 		questionContent.classList.add("question-content");
 
@@ -150,18 +149,15 @@ function fetchSubjectsQuestion(subject) {
 		`;
 
 		questionContainer.append(questionContent);
-
-		optionCheckbox();
 	});
 }
 
 // Event Listener Function for Question-options Checkbox
 function optionCheckbox() {
-	let questionOptionsDetails = document.querySelectorAll(
+	let questionOptionsDetails = document.querySelector(
 		".question-options-details",
 	);
 
-	// console.log(questionOptionsDetails);
 	for (let i = 0; i < questionOptionsDetails.length; i++) {
 		questionOptionsDetails[i].addEventListener("click", () => {
 			for (let j = 0; j < questionOptionsDetails.length; j++) {
@@ -189,7 +185,8 @@ function fetchQuestionNumbers(subject) {
 		".question-number-container p",
 	);
 
-	// console.log(questionNumbers)
+	questionNumbers[0].classList.add("clicked");
+
 	for (let i = 0; i < questionNumbers.length; i++) {
 		questionNumbers[i].addEventListener("click", () => {
 			for (let j = 0; j < questionNumbers.length; j++) {
@@ -198,4 +195,32 @@ function fetchQuestionNumbers(subject) {
 			}
 		});
 	}
+}
+
+// Display just one of the Questions
+function displayOneQuestion() {
+	let questionContents = document.querySelectorAll(".question-content");
+
+	questionContents.forEach((eachQuestionContent) => {
+		eachQuestionContent.classList.add("hidden");
+	});
+
+	let presentQuestion = 0;
+
+	questionContents[presentQuestion].classList.remove("hidden");
+
+	let questionNumbers = document.querySelectorAll(
+		".question-number-container p",
+	);
+
+	questionNumbers.forEach((questionNumber, index) => {
+		questionNumber.addEventListener("click", () => {
+			questionContents.forEach((eachQuestionContent) => {
+				eachQuestionContent.classList.add("hidden");
+			});
+			presentQuestion = index;
+			questionContents[presentQuestion].classList.remove("hidden");
+			console.log(presentQuestion, index);
+		});
+	});
 }
