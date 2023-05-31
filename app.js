@@ -16,7 +16,11 @@ let seconds = 59;
 
 let subjectsTabContainer = document.querySelector(".subjects-tab-container");
 let questionContainer = document.querySelector(".question-container");
-// let quizObjectNumber = 2;
+
+let questionNumbersContainer = document.querySelector(
+	".question-number-container",
+);
+
 
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
@@ -27,7 +31,7 @@ formBtn.addEventListener("click", (e) => {
 		alert("Please Enter Your Username!");
 		return;
 	}
-	usernameValue = "";
+	// usernameValue = "";
 	form.classList.add("hidden");
 
 	testBody.classList.remove("hidden");
@@ -36,17 +40,7 @@ formBtn.addEventListener("click", (e) => {
 
 	fetchSubjectsTabTitle();
 
-	// Adding event Listener on each Subject-tab that calls fetchSubjectsQuestion function
-	let subjectTabButtons = document.querySelectorAll(
-		".subjects-tab-container button",
-	);
-
-	subjectTabButtons.forEach((eachTabButton, index) => {
-		fetchSubjectsQuestion(index - index); // Calls fetchSubjectsQuestion with an initial argument of 0
-		eachTabButton.addEventListener("click", () => {
-			fetchSubjectsQuestion(index);
-		});
-	});
+	subjectTitleQuestions();
 });
 
 // Start Timer Function
@@ -75,7 +69,6 @@ function startTimer() {
 // Fetch subjects Title from Data file
 function fetchSubjectsTabTitle() {
 	quizData.forEach((quizObject) => {
-		// console.log(quizObject.subject);
 		let subjectTitle = quizObject.subject;
 
 		subjectsTabContainer.innerHTML += `<button>${subjectTitle}</button>`;
@@ -85,57 +78,128 @@ function fetchSubjectsTabTitle() {
 	let subjectsTitles = document.querySelectorAll(
 		".subjects-tab-container button",
 	);
-	subjectsTitles[0].classList.add("clicked");
 
 	//Add Click event to a subject-title clicked to add class to it and remove from others
 	for (let i = 0; i < subjectsTitles.length; i++) {
 		subjectsTitles[i].addEventListener("click", () => {
 			for (let j = 0; j < subjectsTitles.length; j++) {
 				subjectsTitles[j].classList.remove("clicked");
+				subjectsTitles[j].classList.add('disabled')
 				subjectsTitles[i].classList.add("clicked");
+				subjectsTitles[i].classList.remove('disabled')
 			}
 		});
 	}
 }
 
-// Fetch Subjects Question
-function fetchSubjectsQuestion(subject) {
-	questionContainer.innerHTML = ""; // Resetting the questionContainer each time the function is called
+// Event Listener Function on Each Subject-title that calls fetchSubjectsQuestion function
+function subjectTitleQuestions() {
+	let subjectTabButtons = document.querySelectorAll(
+		".subjects-tab-container button",
+	);
 
-	let subjectQuestions = quizData[subject].questions;
-
-	subjectQuestions.forEach((eachSubjectQuestion) => {
-		const { id, question, optionA, optionB, optionC, optionD } =
-			eachSubjectQuestion;
-		let questionContent = document.createElement("div");
-
-		questionContent.innerHTML = `
-			<article class="question">
-					<div class="question-details">
-						<p>Q.[${id}]</p>
-						<p>${question}</p>
-					</div>
-					<div class="question-options">
-						<div class="question-options-details clicked">
-							<span></span>
-							<span>${optionA}</span>
-						</div>
-						<div class="question-options-details">
-							<span></span>
-							<span>${optionB}</span>
-						</div>
-						<div class="question-options-details">
-							<span></span>
-							<span>${optionC}</span>
-						</div>
-						<div class="question-options-details">
-							<span></span>
-							<span>${optionD}</span>
-						</div>
-					</div>
-				</article>
-		`;
-
-		questionContainer.append(questionContent);
+	subjectTabButtons.forEach((eachTabButton, index) => {
+		// fetchSubjectsQuestion(index - index); // Calls fetchSubjectsQuestion with an initial argument of 0
+		// fetchQuestionNumbers(0);
+		eachTabButton.addEventListener("click", () => {
+			fetchSubjectsQuestion(index);
+			fetchQuestionNumbers(index);
+		});
 	});
 }
+
+function fetchSubjectsQuestion(subjectIndex) {
+	let subjectQuestionData = quizData[subjectIndex].questions;
+	let subjectQuestionTitle = quizData[subjectIndex].subject.split(" ").join("");
+
+	questionContainer.innerHTML = "";
+
+	subjectQuestionData.forEach((questionData) => {
+		const { id, question, optionA, optionB, optionC, optionD } = questionData;
+
+		let questionContentHTML = document.createElement("div");
+		questionContentHTML.classList.add("question-content");
+		questionContentHTML.classList.add("hidden");
+		// questionContentHTML.classList.add(`${subjectQuestionTitle}`);
+
+		questionContentHTML.innerHTML = `
+			<article class="question">
+				<div class='question-details'>
+					<p>Q. [${id}]</p>
+					<p>${question}</p>
+				</div>
+
+				<div class="question-options">
+					<div class='question-options-details'>
+						<span class='checkbox'></span>
+						<span>${optionA}</span>
+					</div>
+					<div class='question-options-details'>
+						<span class='checkbox'></span>
+						<span>${optionB}</span>
+					</div>
+					<div class='question-options-details'>
+						<span class='checkbox'></span>
+						<span>${optionC}</span>
+					</div>
+					<div class='question-options-details'>
+						<span class='checkbox'></span>
+						<span>${optionD}</span>
+					</div>
+				</div>
+      </article>
+		`;
+
+		questionContainer.append(questionContentHTML);
+	});
+}
+
+function fetchQuestionNumbers(subjectIndex) {
+	let subjectQuestionData = quizData[subjectIndex].questions;
+
+	questionNumbersContainer.innerHTML = "";
+
+	subjectQuestionData.forEach((eachQuestionData) => {
+		const { id } = eachQuestionData;
+
+		let questionsNumberHTML = document.createElement("p");
+		questionsNumberHTML.classList.add("question-number");
+		questionsNumberHTML.innerHTML = `${id}`;
+
+		questionNumbersContainer.append(questionsNumberHTML);
+	});
+
+	let questionNumbers = document.querySelectorAll(".question-number");
+	let questionContent = document.querySelectorAll(".question-content");
+
+	// questionNumbers[0].classList.add("clicked");
+	// questionContent[0].classList.remove("hidden");
+
+	for (let i = 0; i < questionNumbers.length; i++) {
+		questionNumbers[i].addEventListener("click", () => {
+			let questionOptions = Array.from(
+				questionContent[i].firstElementChild.lastElementChild.children,
+			);
+
+			for (let i = 0; i < questionOptions.length; i++) {
+				questionOptions[i].addEventListener("click", () => {
+					for (let j = 0; j < questionOptions.length; j++) {
+						questionOptions[j].classList.remove("clicked");
+						questionOptions[i].classList.add("clicked");
+					}
+				});
+			}
+
+			for (let j = 0; j < questionNumbers.length; j++) {
+				questionNumbers[j].classList.remove("clicked");
+				questionNumbers[i].classList.add("clicked");
+
+				questionContent[j].classList.add("hidden");
+				questionContent[i].classList.remove("hidden");
+			}
+		});
+	}
+}
+
+
+
