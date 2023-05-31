@@ -137,8 +137,14 @@ form button {
   font-size: 1.2rem;
 }
 
-.question-options-details.clicked .checkbox {
+.question-options-details .checkbox.clicked {
   background-color: #000;
+}
+
+.input-checkbox {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
 }
 
 .question-number-container {

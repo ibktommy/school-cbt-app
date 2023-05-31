@@ -103,6 +103,7 @@ function subjectTitleQuestions() {
 		// fetchQuestionNumbers(0);
 		eachTabButton.addEventListener("click", () => {
 			fetchSubjectsQuestion(index);
+			fetchQuestionNumbers(index);
 		});
 	});
 }
@@ -117,6 +118,7 @@ function fetchSubjectsQuestion(subjectIndex) {
 
 		let questionContentHTML = document.createElement("div");
 		questionContentHTML.classList.add("question-content");
+		questionContentHTML.classList.add("hidden");
 		// questionContentHTML.classList.add(`${subjectQuestionTitle}`);
 
 		questionContentHTML.innerHTML = `
@@ -149,6 +151,40 @@ function fetchSubjectsQuestion(subjectIndex) {
 
 		questionContainer.append(questionContentHTML);
 	});
+}
+
+function fetchQuestionNumbers(subjectIndex) {
+	let subjectQuestionData = quizData[subjectIndex].questions;
+
+	questionNumbersContainer.innerHTML = "";
+
+	subjectQuestionData.forEach((eachQuestionData) => {
+		const { id } = eachQuestionData;
+
+		let questionsNumberHTML = document.createElement("p");
+		questionsNumberHTML.classList.add("question-number");
+		questionsNumberHTML.innerHTML = `${id}`;
+
+		questionNumbersContainer.append(questionsNumberHTML);
+	});
+
+	let questionNumbers = document.querySelectorAll(".question-number");
+	let questionContent = document.querySelectorAll(".question-content");
+
+	questionNumbers[0].classList.add("clicked");
+	questionContent[0].classList.remove("hidden");
+
+	for (let i = 0; i < questionNumbers.length; i++) {
+		questionNumbers[i].addEventListener("click", () => {
+			for (let j = 0; j < questionNumbers.length; j++) {
+				questionNumbers[j].classList.remove("clicked");
+				questionNumbers[i].classList.add("clicked");
+
+				questionContent[j].classList.add("hidden");
+				questionContent[i].classList.remove("hidden");
+			}
+		});
+	}
 }
 
 
