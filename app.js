@@ -110,6 +110,7 @@ function subjectTitleQuestions() {
 
 function fetchSubjectsQuestion(subjectIndex) {
 	let subjectQuestionData = quizData[subjectIndex].questions;
+	let subjectQuestionTitle = quizData[subjectIndex].subject.split(" ").join("");
 
 	questionContainer.innerHTML = "";
 
@@ -171,11 +172,24 @@ function fetchQuestionNumbers(subjectIndex) {
 	let questionNumbers = document.querySelectorAll(".question-number");
 	let questionContent = document.querySelectorAll(".question-content");
 
-	questionNumbers[0].classList.add("clicked");
-	questionContent[0].classList.remove("hidden");
+	// questionNumbers[0].classList.add("clicked");
+	// questionContent[0].classList.remove("hidden");
 
 	for (let i = 0; i < questionNumbers.length; i++) {
 		questionNumbers[i].addEventListener("click", () => {
+			let questionOptions = Array.from(
+				questionContent[i].firstElementChild.lastElementChild.children,
+			);
+
+			for (let i = 0; i < questionOptions.length; i++) {
+				questionOptions[i].addEventListener("click", () => {
+					for (let j = 0; j < questionOptions.length; j++) {
+						questionOptions[j].classList.remove("clicked");
+						questionOptions[i].classList.add("clicked");
+					}
+				});
+			}
+
 			for (let j = 0; j < questionNumbers.length; j++) {
 				questionNumbers[j].classList.remove("clicked");
 				questionNumbers[i].classList.add("clicked");
