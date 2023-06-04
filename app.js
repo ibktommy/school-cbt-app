@@ -241,6 +241,8 @@ function optionsSelectionHandler(
 			) {
 				selectedOption.parentElement.classList.add("selected-right");
 				selectedOptionElement.classList.add("correct");
+
+				// Add incorrect-className to all incorrect-options and add correct-className to the correct-option
 				let allOptions = Array.from(selectedOption.parentElement.children);
 				allOptions.forEach((optionItem) => {
 					if (
@@ -272,6 +274,8 @@ function optionsSelectionHandler(
 			) {
 				selectedOption.parentElement.classList.remove("selected-right");
 				selectedOption.parentElement.classList.add("reselect");
+
+				// Remove correct-className and incorrect-className from the options under a question
 				let allOptions = Array.from(selectedOption.parentElement.children);
 				allOptions.forEach((optionItem) => {
 					optionItem.lastElementChild.classList.remove("correct", "incorrect");
@@ -279,6 +283,29 @@ function optionsSelectionHandler(
 				correctScores -= 1;
 				incorrectScores += 1;
 				totalScore = correctScores + incorrectScores;
+			}
+
+			// When User Selects the Correct Answer after having clicked the correct answer in the first instance and then clicked the Incorrect Answer('s)
+			if (
+				selectedOption.parentElement.classList.contains('reselect') === true &&
+				selectedOptionText === correctAnswer &&
+				selectedOptionElement.classList.contains('correct') === true
+			) {
+				// console.log('Works')
+				selectedOption.parentElement.classList.add('selected-right')
+				selectedOption.parentElement.classList.remove('reselect')
+				selectedOptionElement.classList.add('correct')
+
+				// Add incorrect-className to the options that have incorrect-answers
+				let allOptions = Array.from(selectedOption.parentElement.children)
+				allOptions.forEach((optionItem) => {
+					if (optionItem.lastElementChild.classList.contains('correct')) {
+						optionItem.lastElementChild.classList.add('incorrect')
+					}
+				})
+				correctScores = correctScores
+				incorrectScores -= 1
+				totalScore = correctScores + incorrectScores
 			}
 
 			console.log("TotalScore:", totalScore);
