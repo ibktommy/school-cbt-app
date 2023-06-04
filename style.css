@@ -76,6 +76,7 @@ form button {
 
 .subjects-tab-container button.disabled {
   pointer-events: none;
+  opacity: .5;
 }
 
 .question-container {

@@ -21,6 +21,8 @@ let questionNumbersContainer = document.querySelector(
 	".question-number-container",
 );
 
+let correctScores = 0;
+let incorrectScores = 0;
 
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
@@ -84,9 +86,9 @@ function fetchSubjectsTabTitle() {
 		subjectsTitles[i].addEventListener("click", () => {
 			for (let j = 0; j < subjectsTitles.length; j++) {
 				subjectsTitles[j].classList.remove("clicked");
-				subjectsTitles[j].classList.add('disabled')
+				subjectsTitles[j].classList.add("disabled");
 				subjectsTitles[i].classList.add("clicked");
-				subjectsTitles[i].classList.remove('disabled')
+				subjectsTitles[i].classList.remove("disabled");
 			}
 		});
 	}
@@ -110,7 +112,7 @@ function subjectTitleQuestions() {
 
 function fetchSubjectsQuestion(subjectIndex) {
 	let subjectQuestionData = quizData[subjectIndex].questions;
-	let subjectQuestionTitle = quizData[subjectIndex].subject.split(" ").join("");
+	// let subjectQuestionTitle = quizData[subjectIndex].subject.split(" ").join("");
 
 	questionContainer.innerHTML = "";
 
@@ -197,9 +199,16 @@ function fetchQuestionNumbers(subjectIndex) {
 				questionContent[j].classList.add("hidden");
 				questionContent[i].classList.remove("hidden");
 			}
+
+			let questionOptionsDetails = Array.from(
+				questionContent[i].firstElementChild.lastElementChild.children,
+			);
 		});
 	}
 }
+
+
+
 
 
 
