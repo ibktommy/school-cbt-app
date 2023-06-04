@@ -334,11 +334,22 @@ function optionsSelectionHandler(
 			// When User Selects the Incorrect Answer again after the having clicked it in the first instance
 			if (
 				selectedOptionText !== correctAnswer &&
-				selectedOptionElement.classList.contains('incorrect') === true &&
-				selectedOption.parentElement.classList.contains('selected-wrong') === true
+				selectedOptionElement.classList.contains("incorrect") === true &&
+				selectedOption.parentElement.classList.contains("selected-wrong") ===
+					true
 			) {
-				selectedOption.parentElement.classList.add('reselect')
-				incorrectScores = incorrectScores
+				selectedOption.parentElement.classList.add("reselect");
+				incorrectScores = incorrectScores;
+				totalScore = correctScores + incorrectScores;
+			}
+
+			// When User Selects the Correct Answer having Selected the Incorrect Answer in the first instance
+			if (
+				selectedOption.parentElement.classList.contains('selected-wrong') === true && selectedOptionText === correctAnswer
+			) {
+				console.log("Clicked Correct Now")
+				selectedOption.parentElement.classList.remove('selected-wrong')
+				correctScores += 1
 				totalScore = correctScores + incorrectScores
 			}
 
