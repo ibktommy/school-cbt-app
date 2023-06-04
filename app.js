@@ -206,8 +206,58 @@ function fetchQuestionNumbers(subjectIndex) {
 				questionContent[j].classList.add("hidden");
 				questionContent[i].classList.remove("hidden");
 			}
+
+			// Get the Question-option-Details of each question-content displayed
+			let questionOptionsDetails = Array.from(
+				questionContent[i].firstElementChild.lastElementChild.children,
+			);
+
+			// Function that performs operations on the option selected as the user selects an option
+			optionsSelectionHandler(questionOptionsDetails, subjectQuestionData, i)
 		});
 	}
+}
+
+function optionsSelectionHandler(
+	questionOptionsDetails,
+	subjectQuestionData,
+	iterationNumber,
+) {
+	questionOptionsDetails.forEach((selectedOption) => {
+		selectedOption.addEventListener("click", () => {
+			let selectedOptionElement = selectedOption.lastElementChild;
+			let selectedOptionText = selectedOption.lastElementChild.textContent;
+			const { correctAnswer } = subjectQuestionData[iterationNumber];
+			let totalScore = correctScores + incorrectScores;
+
+			console.log(selectedOptionElement);
+
+			// When User Clicks the Correct Answer in the first instance
+			if (
+				selectedOptionText === correctAnswer &&
+				selectedOptionElement.classList.contains("correct") !== true &&
+				selectedOption.parentElement.classList.contains("selected-right") !== true
+			) {
+				selectedOption.parentElement.classList.add("selected-right");
+				selectedOptionElement.classList.add("correct");
+				let allOptions = Array.from(selectedOption.parentElement.children);
+				allOptions.forEach((optionItem) => {
+					if (
+						optionItem.lastElementChild.classList.contains("correct") !== true
+					) {
+						optionItem.lastElementChild.classList.add("incorrect");
+					}
+				});
+				correctScores += 1;
+				incorrectScores = incorrectScores;
+				totalScore = correctScores + incorrectScores;
+			}
+
+			console.log("TotalScore:", totalScore);
+			console.log("CorrectScores:", correctScores);
+			console.log("IncorrectScores:", incorrectScores);
+		});
+	});
 }
 
 
