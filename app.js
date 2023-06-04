@@ -308,6 +308,29 @@ function optionsSelectionHandler(
 				totalScore = correctScores + incorrectScores
 			}
 
+			// When User Clicks the Incorrect Answer in the first instance
+			if (
+				selectedOptionText !== correctAnswer &&
+				selectedOption.parentElement.classList.contains('reselect') === false
+			) {
+				console.log("Incorrect answer in the first instance");
+				selectedOption.parentElement.classList.add("selected-wrong");
+				selectedOptionElement.classList.add("incorrect");
+
+				// Add incorrect-className to all incorrect-options and add correct-className to the correct-option
+				let allOptions = Array.from(selectedOption.parentElement.children)
+				allOptions.forEach((optionItem) => {
+					if (optionItem.lastElementChild.textContent !== correctAnswer) {
+						optionItem.lastElementChild.classList.add('incorrect')
+					} else {
+						optionItem.lastElementChild.classList.add('correct')
+					}
+				})
+				incorrectScores += 1
+				correctScores = correctScores
+				totalScore = incorrectScores + correctScores
+			}
+
 			console.log("TotalScore:", totalScore);
 			console.log("CorrectScores:", correctScores);
 			console.log("IncorrectScores:", incorrectScores);
