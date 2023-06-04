@@ -21,6 +21,9 @@ let questionNumbersContainer = document.querySelector(
 	".question-number-container",
 );
 
+let correctScores = 0;
+let incorrectScores = 0;
+let totalScore = 0;
 
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
@@ -84,9 +87,9 @@ function fetchSubjectsTabTitle() {
 		subjectsTitles[i].addEventListener("click", () => {
 			for (let j = 0; j < subjectsTitles.length; j++) {
 				subjectsTitles[j].classList.remove("clicked");
-				subjectsTitles[j].classList.add('disabled')
+				subjectsTitles[j].classList.add("disabled");
 				subjectsTitles[i].classList.add("clicked");
-				subjectsTitles[i].classList.remove('disabled')
+				subjectsTitles[i].classList.remove("disabled");
 			}
 		});
 	}
@@ -110,7 +113,7 @@ function subjectTitleQuestions() {
 
 function fetchSubjectsQuestion(subjectIndex) {
 	let subjectQuestionData = quizData[subjectIndex].questions;
-	let subjectQuestionTitle = quizData[subjectIndex].subject.split(" ").join("");
+	// let subjectQuestionTitle = quizData[subjectIndex].subject.split(" ").join("");
 
 	questionContainer.innerHTML = "";
 
@@ -157,8 +160,10 @@ function fetchSubjectsQuestion(subjectIndex) {
 function fetchQuestionNumbers(subjectIndex) {
 	let subjectQuestionData = quizData[subjectIndex].questions;
 
+	//Clear the innerHTML when the function is called
 	questionNumbersContainer.innerHTML = "";
 
+	// Get the number of each questions and create an HTML elements for it
 	subjectQuestionData.forEach((eachQuestionData) => {
 		const { id } = eachQuestionData;
 
@@ -169,18 +174,21 @@ function fetchQuestionNumbers(subjectIndex) {
 		questionNumbersContainer.append(questionsNumberHTML);
 	});
 
+	// Selecting the Question Number created and the Question-content so as to  iterate over them
 	let questionNumbers = document.querySelectorAll(".question-number");
 	let questionContent = document.querySelectorAll(".question-content");
 
 	// questionNumbers[0].classList.add("clicked");
 	// questionContent[0].classList.remove("hidden");
 
+	// Adding event Listeners to each Question-Number clicked
 	for (let i = 0; i < questionNumbers.length; i++) {
 		questionNumbers[i].addEventListener("click", () => {
 			let questionOptions = Array.from(
 				questionContent[i].firstElementChild.lastElementChild.children,
 			);
-
+			
+			// Adding event Listener to the options under each Question Content
 			for (let i = 0; i < questionOptions.length; i++) {
 				questionOptions[i].addEventListener("click", () => {
 					for (let j = 0; j < questionOptions.length; j++) {
@@ -190,6 +198,7 @@ function fetchQuestionNumbers(subjectIndex) {
 				});
 			}
 
+			// Adding a class to each question-number such that the question-content for the question-number is displayed and others are hidden
 			for (let j = 0; j < questionNumbers.length; j++) {
 				questionNumbers[j].classList.remove("clicked");
 				questionNumbers[i].classList.add("clicked");
@@ -197,9 +206,164 @@ function fetchQuestionNumbers(subjectIndex) {
 				questionContent[j].classList.add("hidden");
 				questionContent[i].classList.remove("hidden");
 			}
+
+			// Get the Question-option-Details of each question-content displayed
+			let questionOptionsDetails = Array.from(
+				questionContent[i].firstElementChild.lastElementChild.children,
+			);
+
+			// Function that performs operations on the option selected as the user selects an option
+			optionsSelectionHandler(questionOptionsDetails, subjectQuestionData, i)
 		});
 	}
 }
+
+function optionsSelectionHandler(
+	questionOptionsDetails,
+	subjectQuestionData,
+	iterationNumber,
+) {
+	questionOptionsDetails.forEach((selectedOption) => {
+		selectedOption.addEventListener("click", () => {
+			let selectedOptionElement = selectedOption.lastElementChild;
+			let selectedOptionText = selectedOption.lastElementChild.textContent;
+			const { correctAnswer } = subjectQuestionData[iterationNumber];
+			let totalScore = correctScores + incorrectScores;
+
+			console.log(selectedOptionElement);
+
+			// When User Clicks the Correct Answer in the first instance
+			if (
+				selectedOptionText === correctAnswer &&
+				selectedOptionElement.classList.contains("correct") !== true &&
+				selectedOption.parentElement.classList.contains("selected-right") !==
+					true
+			) {
+				selectedOption.parentElement.classList.add("selected-right");
+				selectedOptionElement.classList.add("correct");
+
+				// Add incorrect-className to all incorrect-options and add correct-className to the correct-option
+				let allOptions = Array.from(selectedOption.parentElement.children);
+				allOptions.forEach((optionItem) => {
+					if (
+						optionItem.lastElementChild.classList.contains("correct") !== true
+					) {
+						optionItem.lastElementChild.classList.add("incorrect");
+					}
+				});
+				correctScores += 1;
+				incorrectScores = incorrectScores;
+				totalScore = correctScores + incorrectScores;
+			}
+
+			// When User Selects the Correct Answer after having clicked it in the first instance
+			if (
+				selectedOptionText === correctAnswer &&
+				selectedOptionElement.classList.contains("correct") === true
+			) {
+				correctScores = correctScores;
+				totalScore = correctScores + incorrectScores;
+			}
+
+			// When User Selects the Incorrect Answer after having clicked the correct answer in the first instance
+			if (
+				selectedOption.parentElement.classList.contains("selected-right") ===
+					true &&
+				selectedOptionElement.classList.contains("incorrect") === true &&
+				selectedOptionText !== correctAnswer
+			) {
+				selectedOption.parentElement.classList.remove("selected-right");
+				selectedOption.parentElement.classList.add("reselect");
+
+				// Remove correct-className and incorrect-className from the options under a question
+				let allOptions = Array.from(selectedOption.parentElement.children);
+				allOptions.forEach((optionItem) => {
+					optionItem.lastElementChild.classList.remove("correct", "incorrect");
+				});
+				correctScores -= 1;
+				incorrectScores += 1;
+				totalScore = correctScores + incorrectScores;
+			}
+
+			// When User Selects the Correct Answer after having clicked the correct answer in the first instance and then clicked the Incorrect Answer('s)
+			if (
+				selectedOption.parentElement.classList.contains("reselect") === true &&
+				selectedOptionText === correctAnswer &&
+				selectedOptionElement.classList.contains("correct") === true
+			) {
+				// console.log('Works')
+				selectedOption.parentElement.classList.add("selected-right");
+				selectedOption.parentElement.classList.remove("reselect");
+				selectedOptionElement.classList.add("correct");
+
+				// Add incorrect-className to the options that have incorrect-answers
+				let allOptions = Array.from(selectedOption.parentElement.children);
+				allOptions.forEach((optionItem) => {
+					if (optionItem.lastElementChild.classList.contains("correct")) {
+						optionItem.lastElementChild.classList.add("incorrect");
+					}
+				});
+				correctScores = correctScores;
+				incorrectScores -= 1;
+				totalScore = correctScores + incorrectScores;
+			}
+
+			// When User Clicks the Incorrect Answer in the first instance
+			if (
+				selectedOptionText !== correctAnswer &&
+				selectedOption.parentElement.classList.contains("reselect") === false
+			) {
+				console.log("Incorrect answer in the first instance");
+				selectedOption.parentElement.classList.add("selected-wrong");
+				selectedOptionElement.classList.add("incorrect");
+
+				// Add incorrect-className to all incorrect-options and add correct-className to the correct-option
+				let allOptions = Array.from(selectedOption.parentElement.children);
+				allOptions.forEach((optionItem) => {
+					if (optionItem.lastElementChild.textContent !== correctAnswer) {
+						optionItem.lastElementChild.classList.add("incorrect");
+					} else {
+						optionItem.lastElementChild.classList.add("correct");
+					}
+				});
+				incorrectScores += 1;
+				correctScores = correctScores;
+				totalScore = incorrectScores + correctScores;
+			}
+
+			// When User Selects the Incorrect Answer again after the having clicked it in the first instance
+			if (
+				selectedOptionText !== correctAnswer &&
+				selectedOptionElement.classList.contains("incorrect") === true &&
+				selectedOption.parentElement.classList.contains("selected-wrong") ===
+					true
+			) {
+				selectedOption.parentElement.classList.add("reselect");
+				incorrectScores = incorrectScores;
+				totalScore = correctScores + incorrectScores;
+			}
+
+			// When User Selects the Correct Answer having Selected the Incorrect Answer in the first instance
+			if (
+				selectedOption.parentElement.classList.contains('selected-wrong') === true && selectedOptionText === correctAnswer
+			) {
+				console.log("Clicked Correct Now")
+				selectedOption.parentElement.classList.remove('selected-wrong')
+				correctScores += 1
+				totalScore = correctScores + incorrectScores
+			}
+
+			console.log("TotalScore:", totalScore);
+			console.log("CorrectScores:", correctScores);
+			console.log("IncorrectScores:", incorrectScores);
+		});
+	});
+}
+
+
+
+
+
 
 
 
