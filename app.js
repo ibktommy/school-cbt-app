@@ -263,6 +263,24 @@ function optionsSelectionHandler(
 				totalScore = correctScores + incorrectScores;
 			}
 
+			// When User Selects the Incorrect Answer after having clicked the correct answer in the first instance
+			if (
+				selectedOption.parentElement.classList.contains("selected-right") ===
+					true &&
+				selectedOptionElement.classList.contains("incorrect") === true &&
+				selectedOptionText !== correctAnswer
+			) {
+				selectedOption.parentElement.classList.remove("selected-right");
+				selectedOption.parentElement.classList.add("reselect");
+				let allOptions = Array.from(selectedOption.parentElement.children);
+				allOptions.forEach((optionItem) => {
+					optionItem.lastElementChild.classList.remove("correct", "incorrect");
+				});
+				correctScores -= 1;
+				incorrectScores += 1;
+				totalScore = correctScores + incorrectScores;
+			}
+
 			console.log("TotalScore:", totalScore);
 			console.log("CorrectScores:", correctScores);
 			console.log("IncorrectScores:", incorrectScores);
