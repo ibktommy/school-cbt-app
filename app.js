@@ -236,7 +236,8 @@ function optionsSelectionHandler(
 			if (
 				selectedOptionText === correctAnswer &&
 				selectedOptionElement.classList.contains("correct") !== true &&
-				selectedOption.parentElement.classList.contains("selected-right") !== true
+				selectedOption.parentElement.classList.contains("selected-right") !==
+					true
 			) {
 				selectedOption.parentElement.classList.add("selected-right");
 				selectedOptionElement.classList.add("correct");
@@ -250,6 +251,15 @@ function optionsSelectionHandler(
 				});
 				correctScores += 1;
 				incorrectScores = incorrectScores;
+				totalScore = correctScores + incorrectScores;
+			}
+
+			// When User Selects the Correct Answer after having clicked it in the first instance
+			if (
+				selectedOptionText === correctAnswer &&
+				selectedOptionElement.classList.contains("correct") === true
+			) {
+				correctScores = correctScores;
 				totalScore = correctScores + incorrectScores;
 			}
 
