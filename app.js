@@ -287,48 +287,59 @@ function optionsSelectionHandler(
 
 			// When User Selects the Correct Answer after having clicked the correct answer in the first instance and then clicked the Incorrect Answer('s)
 			if (
-				selectedOption.parentElement.classList.contains('reselect') === true &&
+				selectedOption.parentElement.classList.contains("reselect") === true &&
 				selectedOptionText === correctAnswer &&
-				selectedOptionElement.classList.contains('correct') === true
+				selectedOptionElement.classList.contains("correct") === true
 			) {
 				// console.log('Works')
-				selectedOption.parentElement.classList.add('selected-right')
-				selectedOption.parentElement.classList.remove('reselect')
-				selectedOptionElement.classList.add('correct')
+				selectedOption.parentElement.classList.add("selected-right");
+				selectedOption.parentElement.classList.remove("reselect");
+				selectedOptionElement.classList.add("correct");
 
 				// Add incorrect-className to the options that have incorrect-answers
-				let allOptions = Array.from(selectedOption.parentElement.children)
+				let allOptions = Array.from(selectedOption.parentElement.children);
 				allOptions.forEach((optionItem) => {
-					if (optionItem.lastElementChild.classList.contains('correct')) {
-						optionItem.lastElementChild.classList.add('incorrect')
+					if (optionItem.lastElementChild.classList.contains("correct")) {
+						optionItem.lastElementChild.classList.add("incorrect");
 					}
-				})
-				correctScores = correctScores
-				incorrectScores -= 1
-				totalScore = correctScores + incorrectScores
+				});
+				correctScores = correctScores;
+				incorrectScores -= 1;
+				totalScore = correctScores + incorrectScores;
 			}
 
 			// When User Clicks the Incorrect Answer in the first instance
 			if (
 				selectedOptionText !== correctAnswer &&
-				selectedOption.parentElement.classList.contains('reselect') === false
+				selectedOption.parentElement.classList.contains("reselect") === false
 			) {
 				console.log("Incorrect answer in the first instance");
 				selectedOption.parentElement.classList.add("selected-wrong");
 				selectedOptionElement.classList.add("incorrect");
 
 				// Add incorrect-className to all incorrect-options and add correct-className to the correct-option
-				let allOptions = Array.from(selectedOption.parentElement.children)
+				let allOptions = Array.from(selectedOption.parentElement.children);
 				allOptions.forEach((optionItem) => {
 					if (optionItem.lastElementChild.textContent !== correctAnswer) {
-						optionItem.lastElementChild.classList.add('incorrect')
+						optionItem.lastElementChild.classList.add("incorrect");
 					} else {
-						optionItem.lastElementChild.classList.add('correct')
+						optionItem.lastElementChild.classList.add("correct");
 					}
-				})
-				incorrectScores += 1
-				correctScores = correctScores
-				totalScore = incorrectScores + correctScores
+				});
+				incorrectScores += 1;
+				correctScores = correctScores;
+				totalScore = incorrectScores + correctScores;
+			}
+
+			// When User Selects the Incorrect Answer again after the having clicked it in the first instance
+			if (
+				selectedOptionText !== correctAnswer &&
+				selectedOptionElement.classList.contains('incorrect') === true &&
+				selectedOption.parentElement.classList.contains('selected-wrong') === true
+			) {
+				selectedOption.parentElement.classList.add('reselect')
+				incorrectScores = incorrectScores
+				totalScore = correctScores + incorrectScores
 			}
 
 			console.log("TotalScore:", totalScore);
