@@ -23,6 +23,7 @@ let questionNumbersContainer = document.querySelector(
 
 let correctScores = 0;
 let incorrectScores = 0;
+let totalScore = 0;
 
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
@@ -159,8 +160,10 @@ function fetchSubjectsQuestion(subjectIndex) {
 function fetchQuestionNumbers(subjectIndex) {
 	let subjectQuestionData = quizData[subjectIndex].questions;
 
+	//Clear the innerHTML when the function is called
 	questionNumbersContainer.innerHTML = "";
 
+	// Get the number of each questions and create an HTML elements for it
 	subjectQuestionData.forEach((eachQuestionData) => {
 		const { id } = eachQuestionData;
 
@@ -171,18 +174,21 @@ function fetchQuestionNumbers(subjectIndex) {
 		questionNumbersContainer.append(questionsNumberHTML);
 	});
 
+	// Selecting the Question Number created and the Question-content so as to  iterate over them
 	let questionNumbers = document.querySelectorAll(".question-number");
 	let questionContent = document.querySelectorAll(".question-content");
 
 	// questionNumbers[0].classList.add("clicked");
 	// questionContent[0].classList.remove("hidden");
 
+	// Adding event Listeners to each Question-Number clicked
 	for (let i = 0; i < questionNumbers.length; i++) {
 		questionNumbers[i].addEventListener("click", () => {
 			let questionOptions = Array.from(
 				questionContent[i].firstElementChild.lastElementChild.children,
 			);
-
+			
+			// Adding event Listener to the options under each Question Content
 			for (let i = 0; i < questionOptions.length; i++) {
 				questionOptions[i].addEventListener("click", () => {
 					for (let j = 0; j < questionOptions.length; j++) {
@@ -192,6 +198,7 @@ function fetchQuestionNumbers(subjectIndex) {
 				});
 			}
 
+			// Adding a class to each question-number such that the question-content for the question-number is displayed and others are hidden
 			for (let j = 0; j < questionNumbers.length; j++) {
 				questionNumbers[j].classList.remove("clicked");
 				questionNumbers[i].classList.add("clicked");
@@ -199,13 +206,11 @@ function fetchQuestionNumbers(subjectIndex) {
 				questionContent[j].classList.add("hidden");
 				questionContent[i].classList.remove("hidden");
 			}
-
-			let questionOptionsDetails = Array.from(
-				questionContent[i].firstElementChild.lastElementChild.children,
-			);
 		});
 	}
 }
+
+
 
 
 
