@@ -95,6 +95,16 @@ function fetchSubjectsTabTitle() {
 				subjectsTitles[i].classList.add("clicked");
 				subjectsTitles[i].classList.remove("disabled");
 			}
+
+
+			// Update the over-all-scores when a subject-title is clicked
+			overallCorrectScores += correctScores;
+			overallIncorrectScores += incorrectScores;
+			overallTotalScores += totalScore;
+
+			console.log("OverAllCorrect: ", overallCorrectScores);
+			console.log("overallIncorrectScores: ", overallIncorrectScores);
+			console.log("overallTotalScores: ", overallTotalScores);
 		});
 	}
 }
