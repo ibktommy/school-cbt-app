@@ -25,6 +25,10 @@ let correctScores = 0;
 let incorrectScores = 0;
 let totalScore = 0;
 
+let overallCorrectScores = 0;
+let overallIncorrectScores = 0;
+let overallTotalScores = 0;
+
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
 	e.preventDefault();
@@ -187,7 +191,7 @@ function fetchQuestionNumbers(subjectIndex) {
 			let questionOptions = Array.from(
 				questionContent[i].firstElementChild.lastElementChild.children,
 			);
-			
+
 			// Adding event Listener to the options under each Question Content
 			for (let i = 0; i < questionOptions.length; i++) {
 				questionOptions[i].addEventListener("click", () => {
@@ -213,7 +217,7 @@ function fetchQuestionNumbers(subjectIndex) {
 			);
 
 			// Function that performs operations on the option selected as the user selects an option
-			optionsSelectionHandler(questionOptionsDetails, subjectQuestionData, i)
+			optionsSelectionHandler(questionOptionsDetails, subjectQuestionData, i);
 		});
 	}
 }
@@ -228,9 +232,8 @@ function optionsSelectionHandler(
 			let selectedOptionElement = selectedOption.lastElementChild;
 			let selectedOptionText = selectedOption.lastElementChild.textContent;
 			const { correctAnswer } = subjectQuestionData[iterationNumber];
-			let totalScore = correctScores + incorrectScores;
+			totalScore = correctScores + incorrectScores;
 
-			console.log(selectedOptionElement);
 
 			// When User Clicks the Correct Answer in the first instance
 			if (
@@ -313,7 +316,7 @@ function optionsSelectionHandler(
 				selectedOptionText !== correctAnswer &&
 				selectedOption.parentElement.classList.contains("reselect") === false
 			) {
-				console.log("Incorrect answer in the first instance");
+				// console.log("Incorrect answer in the first instance");
 				selectedOption.parentElement.classList.add("selected-wrong");
 				selectedOptionElement.classList.add("incorrect");
 
@@ -345,19 +348,45 @@ function optionsSelectionHandler(
 
 			// When User Selects the Correct Answer having Selected the Incorrect Answer in the first instance
 			if (
-				selectedOption.parentElement.classList.contains('selected-wrong') === true && selectedOptionText === correctAnswer
+				selectedOption.parentElement.classList.contains("selected-wrong") ===
+					true &&
+				selectedOptionText === correctAnswer
 			) {
-				console.log("Clicked Correct Now")
-				selectedOption.parentElement.classList.remove('selected-wrong')
-				correctScores += 1
-				totalScore = correctScores + incorrectScores
+				console.log("Clicked Correct Now");
+				selectedOption.parentElement.classList.remove("selected-wrong");
+				correctScores += 1;
+				totalScore = correctScores + incorrectScores;
 			}
 
 			console.log("TotalScore:", totalScore);
 			console.log("CorrectScores:", correctScores);
 			console.log("IncorrectScores:", incorrectScores);
+
+			// Function that monitors the the number of questioned answered by user
+			changeSubjectTab(subjectQuestionData);
 		});
 	});
+}
+
+function changeSubjectTab(subjectQuestionData) {
+	if (totalScore === subjectQuestionData.length) {
+		console.log(totalScore)
+
+		let subjectsTitlesTab = document.querySelectorAll(
+			".subjects-tab-container button",
+		);
+
+		subjectsTitlesTab.forEach((eachTitlesTab) => {
+			if (eachTitlesTab.classList.contains("clicked") === true) {
+				eachTitlesTab.classList.add("disabled", 'selected');
+			} else {
+				eachTitlesTab.classList.remove("disabled");
+			}
+			if (eachTitlesTab.classList.contains('selected') === true) {
+				eachTitlesTab.classList.add('disabled')
+			}
+		});
+	}
 }
 
 
