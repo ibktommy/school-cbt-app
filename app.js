@@ -102,6 +102,11 @@ function fetchSubjectsTabTitle() {
 			overallIncorrectScores += incorrectScores;
 			overallTotalScores += totalScore;
 
+			// Reset the current-scores when a new subject-title is selected
+			totalScore = 0;
+			correctScores = 0;
+			incorrectScores = 0;
+
 			console.log("OverAllCorrect: ", overallCorrectScores);
 			console.log("overallIncorrectScores: ", overallIncorrectScores);
 			console.log("overallTotalScores: ", overallTotalScores);
