@@ -116,18 +116,7 @@ function fetchSubjectsTabTitle() {
 			if (subjectsTitles[i].parentElement.classList.contains('selected') && overallTotalScores === 0) {
 				timer = setInterval(startTimer, 1000);
 			}
-			// subjectsTitles.forEach((eachSubjectTitles) => {
-			// 	if (eachSubjectTitles.classList.contains('clicked') === true) {
-			// 		console.log('START')
-			// 	}
-			// })
 		});
-
-		// subjectsTitles.forEach((eachSubjectTitltes) => {
-		// 	if (eachSubjectTitltes.classList.contains("clicked") === true) {
-		// 		console.log("START");
-		// 	}
-		// });
 	}
 }
 
