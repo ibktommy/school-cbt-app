@@ -43,7 +43,6 @@ formBtn.addEventListener("click", (e) => {
 
 	testBody.classList.remove("hidden");
 	welcomeNote.innerHTML = `Hello there, <b>${usernameValue}</b>.<br> Welcome to Computer Based Test App`;
-	timer = setInterval(startTimer, 1000);
 
 	fetchSubjectsTabTitle();
 
@@ -110,7 +109,25 @@ function fetchSubjectsTabTitle() {
 			console.log("OverAllCorrect: ", overallCorrectScores);
 			console.log("overallIncorrectScores: ", overallIncorrectScores);
 			console.log("overallTotalScores: ", overallTotalScores);
+
+			// Calling the Timer function after user selects a subjectTitle for the first time
+			subjectsTitles[i].parentElement.classList.add('selected')
+
+			if (subjectsTitles[i].parentElement.classList.contains('selected') && overallTotalScores === 0) {
+				timer = setInterval(startTimer, 1000);
+			}
+			// subjectsTitles.forEach((eachSubjectTitles) => {
+			// 	if (eachSubjectTitles.classList.contains('clicked') === true) {
+			// 		console.log('START')
+			// 	}
+			// })
 		});
+
+		// subjectsTitles.forEach((eachSubjectTitltes) => {
+		// 	if (eachSubjectTitltes.classList.contains("clicked") === true) {
+		// 		console.log("START");
+		// 	}
+		// });
 	}
 }
 
@@ -403,6 +420,8 @@ function changeSubjectTab(subjectQuestionData) {
 		});
 	}
 }
+
+
 
 
 
