@@ -11,6 +11,9 @@ html {
 
 body {
   background: #f2f2f2;
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
 }
 
 .hidden {
@@ -32,6 +35,15 @@ body {
 
 form button {
   cursor: pointer;
+}
+
+.test-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.test-body.hidden {
+  display: none;
 }
 
 .welcome {
@@ -172,3 +184,109 @@ form button {
   border: .1rem solid #000;
 }
 
+/* SUBMIT BUTTON */
+.submit-btn {
+  display: inline-block;
+  width: 25rem;
+  align-self: flex-end;
+  height: 5rem;
+  margin-top: 3rem;
+  border-radius: .5rem;
+  border: none;
+  background: green;
+  color: #fff;
+  font-size: 1.6rem;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  /* cursor: pointer; */
+  pointer-events: none;
+  opacity: .4;
+}
+
+.submit-btn:hover {
+  background: red;
+  transition: .4s ease;
+}
+
+.submit-alert-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit-alert-container.display {
+  display: none;
+}
+
+.submit-alert {
+  width: 60rem;
+  background: #fff;
+  padding: 3rem;
+  margin-bottom: 20rem;
+  border-radius: .5rem;
+  box-shadow: rgba(0, 0, 0, .24) 0px 3px 8px;
+}
+
+.submit-alert h4 {
+  text-align: center;
+  font-size: 2rem;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.submit-alert ul {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.submit-alert ul li {
+  display: flex;
+  align-items: center;
+}
+
+.submit-alert ul li span {
+  display: inline-block;
+  margin-right: .5rem;
+  font-size: 2rem;
+}
+
+.submit-alert ul li p {
+  font-size: 1.6rem;
+}
+
+.alert-action-btn {
+  text-align: center;
+}
+
+.alert-btn {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  border: none;
+  background: green;
+  color: #fff;
+  border-radius: .5rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: .3rem;
+}
+
+.alert-btn:first-child {
+  margin-right: 1rem;
+}
+.alert-btn:last-child {
+  margin-left: 1rem;
+}
+
+.alert-btn:hover {
+  transform: scale(1.05);
+  transition: .4s ease;
+}
