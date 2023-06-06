@@ -29,6 +29,8 @@ let overallCorrectScores = 0;
 let overallIncorrectScores = 0;
 let overallTotalScores = 0;
 
+let submitButton = document.querySelector(".submit-btn");
+
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
 	e.preventDefault();
@@ -115,6 +117,7 @@ function fetchSubjectsTabTitle() {
 
 			if (subjectsTitles[i].parentElement.classList.contains('selected') && overallTotalScores === 0) {
 				timer = setInterval(startTimer, 1000);
+				submitButton.classList.add("active");
 			}
 		});
 	}
