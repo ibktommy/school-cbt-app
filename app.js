@@ -30,6 +30,7 @@ let overallIncorrectScores = 0;
 let overallTotalScores = 0;
 
 let submitButton = document.querySelector(".submit-btn");
+let submitAlertContainer = document.querySelector(".submit-alert-container");
 
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
@@ -412,6 +413,14 @@ function changeSubjectTab(subjectQuestionData) {
 		});
 	}
 }
+
+// Event for when submit-button is clicked
+submitButton.addEventListener('click', () => {
+	submitAlertContainer.classList.remove('display')
+})
+
+
+
 
 
 
