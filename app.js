@@ -73,8 +73,19 @@ function startTimer() {
 	} else {
 		if (seconds === 0) {
 			clearTimer = clearInterval(timer);
+
+			// if (minutesTag.textContent === "00" && secondsTag.textContent === "00") {
+			// 	submitAlertContainer.classList.remove('display')
+			// }
 		}
 	}
+
+	// console.log(minutesTag, secondsTag);
+	// if (minutesTag === "00" && secondsTag === "00") {
+	// 	// clearTimer = clearInterval(timer)
+	// 	alert('EXAM HAS ENDED')
+
+	// }
 }
 
 // Fetch subjects Title from Data file
