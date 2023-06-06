@@ -31,6 +31,8 @@ let overallTotalScores = 0;
 
 let submitButton = document.querySelector(".submit-btn");
 let submitAlertContainer = document.querySelector(".submit-alert-container");
+let yesButton = document.querySelector(".yes-btn");
+let noButton = document.querySelector(".no-btn");
 
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
@@ -98,7 +100,6 @@ function fetchSubjectsTabTitle() {
 				subjectsTitles[i].classList.remove("disabled");
 			}
 
-
 			// Update the over-all-scores when a subject-title is clicked
 			overallCorrectScores += correctScores;
 			overallIncorrectScores += incorrectScores;
@@ -114,9 +115,12 @@ function fetchSubjectsTabTitle() {
 			console.log("overallTotalScores: ", overallTotalScores);
 
 			// Calling the Timer function after user selects a subjectTitle for the first time
-			subjectsTitles[i].parentElement.classList.add('selected')
+			subjectsTitles[i].parentElement.classList.add("selected");
 
-			if (subjectsTitles[i].parentElement.classList.contains('selected') && overallTotalScores === 0) {
+			if (
+				subjectsTitles[i].parentElement.classList.contains("selected") &&
+				overallTotalScores === 0
+			) {
 				timer = setInterval(startTimer, 1000);
 				submitButton.classList.add("active");
 			}
@@ -259,7 +263,6 @@ function optionsSelectionHandler(
 			const { correctAnswer } = subjectQuestionData[iterationNumber];
 			totalScore = correctScores + incorrectScores;
 
-
 			// When User Clicks the Correct Answer in the first instance
 			if (
 				selectedOptionText === correctAnswer &&
@@ -395,7 +398,7 @@ function optionsSelectionHandler(
 
 function changeSubjectTab(subjectQuestionData) {
 	if (totalScore === subjectQuestionData.length) {
-		console.log(totalScore)
+		console.log(totalScore);
 
 		let subjectsTitlesTab = document.querySelectorAll(
 			".subjects-tab-container button",
@@ -403,24 +406,28 @@ function changeSubjectTab(subjectQuestionData) {
 
 		subjectsTitlesTab.forEach((eachTitlesTab) => {
 			if (eachTitlesTab.classList.contains("clicked") === true) {
-				eachTitlesTab.classList.add("disabled", 'selected');
+				eachTitlesTab.classList.add("disabled", "selected");
 			} else {
 				eachTitlesTab.classList.remove("disabled");
 			}
-			if (eachTitlesTab.classList.contains('selected') === true) {
-				eachTitlesTab.classList.add('disabled')
+			if (eachTitlesTab.classList.contains("selected") === true) {
+				eachTitlesTab.classList.add("disabled");
 			}
 		});
 	}
 }
 
 // Event for when submit-button is clicked
-submitButton.addEventListener('click', () => {
-	submitAlertContainer.classList.remove('display')
-})
+submitButton.addEventListener("click", () => {
+	submitAlertContainer.classList.remove("display");
+	clearTimer = clearInterval(timer)
+});
 
-
-
+// Event for when submit-alert-buttons are clicked
+noButton.addEventListener("click", () => {
+	submitAlertContainer.classList.add("display");
+	timer = setInterval(startTimer, 1000)
+});
 
 
 
