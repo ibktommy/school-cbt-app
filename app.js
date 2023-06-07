@@ -46,11 +46,11 @@ formBtn.addEventListener("click", (e) => {
 		alert("Please Enter Your Username!");
 		return;
 	}
-	// usernameValue = "";
 	form.classList.add("hidden");
 
 	testBody.classList.remove("hidden");
 	welcomeNote.innerHTML = `Hello there, <b>${usernameValue}</b>.<br> Welcome to Computer Based Test App`;
+	username.value = "";
 
 	fetchSubjectsTabTitle();
 
@@ -434,18 +434,23 @@ function changeSubjectTab(subjectQuestionData) {
 // Event for when submit-button is clicked
 submitButton.addEventListener("click", () => {
 	submitAlertContainer.classList.remove("display");
-	clearTimer = clearInterval(timer)
+	clearTimer = clearInterval(timer);
 });
 
 // Event for when submit-alert-buttons are clicked
 noButton.addEventListener("click", () => {
 	submitAlertContainer.classList.add("display");
-	timer = setInterval(startTimer, 1000)
+	timer = setInterval(startTimer, 1000);
 });
 
 yesButton.addEventListener("click", () => {
 	submitAlertContainer.classList.add("display");
 	testResultContainer.classList.remove("display");
+});
+
+// Event Listener for when the result-button is clicked
+resultButton.addEventListener("click", () => {
+	window.location.reload();
 });
 
 
