@@ -311,3 +311,69 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.test-result-container.display {
+  display: none;
+}
+
+.test-result {
+  width: 60rem;
+  background: #fff;
+  padding: 3rem;
+  margin-bottom: 20rem;
+  border-radius: .5rem;
+  box-shadow: rgba(0, 0, 0, .24) 0px 3px 8px;
+}
+
+.test-result h4 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.result-content {
+  border-bottom: .1rem solid #d9d9d9;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+.result-content h5 {
+  font-size: 1.6rem;
+  text-transform: uppercase;
+}
+
+.result-content p {
+  font-size: 1.4rem;
+}
+
+.result-content p:first-of-type {
+  margin: 1rem 0;
+}
+
+.result-content p:last-of-type {
+  font-weight: bold;
+}
+
+.result-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: .1rem solid #494848;
+  padding-bottom: 1.5rem;
+}
+
+.result-total h5 {
+  font-size: 1.6rem;
+  text-transform: uppercase;
+}
+
+.result-total p {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.result-btn {
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+}
