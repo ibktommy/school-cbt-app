@@ -34,6 +34,9 @@ let submitAlertContainer = document.querySelector(".submit-alert-container");
 let yesButton = document.querySelector(".yes-btn");
 let noButton = document.querySelector(".no-btn");
 
+let testResultContainer = document.querySelector(".test-result-container");
+let resultButton = document.querySelector(".result-btn");
+
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
 	e.preventDefault();
@@ -438,6 +441,11 @@ submitButton.addEventListener("click", () => {
 noButton.addEventListener("click", () => {
 	submitAlertContainer.classList.add("display");
 	timer = setInterval(startTimer, 1000)
+});
+
+yesButton.addEventListener("click", () => {
+	submitAlertContainer.classList.add("display");
+	testResultContainer.classList.remove("display");
 });
 
 
