@@ -496,8 +496,19 @@ yesButton.addEventListener("click", () => {
 	}
 
 	// Condition to push the last subject result into the sortedResultData when user ends the test
-	if (sortedResultData.length === quizData.length - 1) {
+	if (sortedResultData.length === quizData.length - 1 ) {
 		sortedResultData.push(resultData[resultData.length - 1]);
+		resultData = []
+	}
+
+	// Condition that push the updated resultData into the sortedResultData when user ends exam while the present-subject questions have not been answered totally
+	if (
+		sortedResultData.length > 0 &&
+		resultData.length > 0 &&
+		sortedResultData.length !== quizData.length - 1
+	) {
+		sortedResultData.push(resultData[resultData.length - 1]);
+		console.log("WORKS");
 	}
 
 	console.log(resultData)
