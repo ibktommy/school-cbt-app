@@ -490,6 +490,11 @@ yesButton.addEventListener("click", () => {
 	submitAlertContainer.classList.add("display");
 	testResultContainer.classList.remove("display");
 
+	// Condition to push the last subject result into the sortedResultData when user ends the test
+	if (sortedResultData.length === quizData.length - 1) {
+		sortedResultData.push(resultData[resultData.length - 1]);
+	}
+
 	console.log(resultData)
 	console.log(resultData[resultData.length - 1])
 	console.log(sortedResultData);
