@@ -37,6 +37,10 @@ let noButton = document.querySelector(".no-btn");
 let testResultContainer = document.querySelector(".test-result-container");
 let resultButton = document.querySelector(".result-btn");
 
+let sortedResultData = [];
+let resultData = [];
+let resultDataObject;
+
 // Event Listener on the Form Button
 formBtn.addEventListener("click", (e) => {
 	e.preventDefault();
@@ -119,14 +123,24 @@ function fetchSubjectsTabTitle() {
 			overallIncorrectScores += incorrectScores;
 			overallTotalScores += totalScore;
 
+			if (resultData.length === 0) {
+				sortedResultData = []
+			} else {
+				sortedResultData.push(resultData[resultData.length - 1]);
+				console.log(sortedResultData)
+			}
+
 			// Reset the current-scores when a new subject-title is selected
 			totalScore = 0;
 			correctScores = 0;
 			incorrectScores = 0;
+			// resultDataObject = {};
+			resultData = []
 
 			console.log("OverAllCorrect: ", overallCorrectScores);
 			console.log("overallIncorrectScores: ", overallIncorrectScores);
 			console.log("overallTotalScores: ", overallTotalScores);
+			console.log(resultData);
 
 			// Calling the Timer function after user selects a subjectTitle for the first time
 			subjectsTitles[i].parentElement.classList.add("selected");
@@ -260,7 +274,12 @@ function fetchQuestionNumbers(subjectIndex) {
 			);
 
 			// Function that performs operations on the option selected as the user selects an option
-			optionsSelectionHandler(questionOptionsDetails, subjectQuestionData, i);
+			optionsSelectionHandler(
+				questionOptionsDetails,
+				subjectQuestionData,
+				i,
+				subjectIndex,
+			);
 		});
 	}
 }
@@ -269,6 +288,7 @@ function optionsSelectionHandler(
 	questionOptionsDetails,
 	subjectQuestionData,
 	iterationNumber,
+	subjectIndex,
 ) {
 	questionOptionsDetails.forEach((selectedOption) => {
 		selectedOption.addEventListener("click", () => {
@@ -404,6 +424,29 @@ function optionsSelectionHandler(
 			console.log("CorrectScores:", correctScores);
 			console.log("IncorrectScores:", incorrectScores);
 
+			let subjectTitle = quizData[subjectIndex].subject;
+
+			resultDataObject = {
+				id: subjectIndex,
+				subjectTitle: subjectTitle,
+				totalScore: totalScore,
+				correctScores: correctScores,
+				incorrectScores: incorrectScores,
+			};
+
+			console.log(resultDataObject);
+
+			if (!resultDataObject) {
+				resultData = [];
+			} else {
+				resultData.push(resultDataObject)
+				
+				// resultData.push(resultDataObject);
+			}
+
+			console.log("overallTotalScores: ", overallTotalScores);
+			console.log("OverAllCorrect: ", overallCorrectScores);
+			console.log("overallIncorrectScores: ", overallIncorrectScores);
 			// Function that monitors the the number of questioned answered by user
 			changeSubjectTab(subjectQuestionData);
 		});
@@ -446,6 +489,10 @@ noButton.addEventListener("click", () => {
 yesButton.addEventListener("click", () => {
 	submitAlertContainer.classList.add("display");
 	testResultContainer.classList.remove("display");
+
+	console.log(resultData)
+	console.log(resultData[resultData.length - 1])
+	console.log(sortedResultData);
 });
 
 // Event Listener for when the result-button is clicked
