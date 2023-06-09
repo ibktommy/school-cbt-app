@@ -484,33 +484,6 @@ noButton.addEventListener("click", () => {
 yesButton.addEventListener("click", () => {
 	submitAlertContainer.classList.add("display");
 	testResultContainer.classList.remove("display");
-
-	// Condition to push the last updated resultData for a subject when only one subject was selected before user ends the test
-	// if (sortedResultData.length === 0) {
-	// 	sortedResultData.push(resultData[resultData.length - 1])
-	// 	resultData = []
-	// }
-
-	// if (sortedResultData.length > 0 && sortedResultData.length !== quizData.length -1 && sortedResultData.length !== 0) {
-	// 	sortedResultData.push(resultData[resultData.length - 1]);
-	// 	resultData = [];
-	// }
-
-	// Condition to push the last subject result into the sortedResultData when user ends the test
-	// if (sortedResultData.length === quizData.length - 1) {
-	// 	sortedResultData.push(resultData[resultData.length - 1]);
-	// 	resultData = []
-	// }
-
-	// Condition that push the updated resultData into the sortedResultData when user ends exam while the present-subject questions have not been answered totally
-	// if (
-	// 	sortedResultData.length > 0 &&
-	// 	resultData.length === 0 &&
-	// 	sortedResultData.length !== quizData.length - 1
-	// ) {
-	// 	sortedResultData.push(resultData[resultData.length - 1]);
-	// 	console.log("WORKS");
-	// }
 });
 
 // Event Listener for when the result-button is clicked
