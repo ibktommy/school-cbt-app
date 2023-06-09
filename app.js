@@ -123,24 +123,14 @@ function fetchSubjectsTabTitle() {
 			overallIncorrectScores += incorrectScores;
 			overallTotalScores += totalScore;
 
-			if (resultData.length === 0) {
-				sortedResultData = []
-			} else {
-				sortedResultData.push(resultData[resultData.length - 1]);
-				console.log(sortedResultData)
-			}
-
 			// Reset the current-scores when a new subject-title is selected
 			totalScore = 0;
 			correctScores = 0;
 			incorrectScores = 0;
-			// resultDataObject = {};
-			resultData = []
 
 			console.log("OverAllCorrect: ", overallCorrectScores);
 			console.log("overallIncorrectScores: ", overallIncorrectScores);
 			console.log("overallTotalScores: ", overallTotalScores);
-			console.log(resultData);
 
 			// Calling the Timer function after user selects a subjectTitle for the first time
 			subjectsTitles[i].parentElement.classList.add("selected");
@@ -152,6 +142,18 @@ function fetchSubjectsTabTitle() {
 				timer = setInterval(startTimer, 1000);
 				submitButton.classList.add("active");
 			}
+
+			// Pushing the last updated item in the resultData-Array to the sortedResultData-Array when a new subject is selected
+			if (resultData.length !== 0 && resultDataObject !== undefined) {
+				sortedResultData.push(resultData[resultData.length - 1]);
+			}
+
+			resultDataObject = undefined
+			resultData = []
+
+			console.log(resultDataObject);
+			console.log(resultData);
+			console.log(sortedResultData);
 		});
 	}
 }
@@ -435,14 +437,7 @@ function optionsSelectionHandler(
 			};
 
 			console.log(resultDataObject);
-
-			if (!resultDataObject) {
-				resultData = [];
-			} else {
-				resultData.push(resultDataObject)
-				
-				// resultData.push(resultDataObject);
-			}
+			resultData.push(resultDataObject);
 
 			console.log("overallTotalScores: ", overallTotalScores);
 			console.log("OverAllCorrect: ", overallCorrectScores);
@@ -491,29 +486,31 @@ yesButton.addEventListener("click", () => {
 	testResultContainer.classList.remove("display");
 
 	// Condition to push the last updated resultData for a subject when only one subject was selected before user ends the test
-	if (sortedResultData.length === 0) {
-		sortedResultData.push(resultData[resultData.length - 1])
-	}
+	// if (sortedResultData.length === 0) {
+	// 	sortedResultData.push(resultData[resultData.length - 1])
+	// 	resultData = []
+	// }
+
+	// if (sortedResultData.length > 0 && sortedResultData.length !== quizData.length -1 && sortedResultData.length !== 0) {
+	// 	sortedResultData.push(resultData[resultData.length - 1]);
+	// 	resultData = [];
+	// }
 
 	// Condition to push the last subject result into the sortedResultData when user ends the test
-	if (sortedResultData.length === quizData.length - 1 ) {
-		sortedResultData.push(resultData[resultData.length - 1]);
-		resultData = []
-	}
+	// if (sortedResultData.length === quizData.length - 1) {
+	// 	sortedResultData.push(resultData[resultData.length - 1]);
+	// 	resultData = []
+	// }
 
 	// Condition that push the updated resultData into the sortedResultData when user ends exam while the present-subject questions have not been answered totally
-	if (
-		sortedResultData.length > 0 &&
-		resultData.length > 0 &&
-		sortedResultData.length !== quizData.length - 1
-	) {
-		sortedResultData.push(resultData[resultData.length - 1]);
-		console.log("WORKS");
-	}
-
-	console.log(resultData)
-	console.log(resultData[resultData.length - 1])
-	console.log(sortedResultData);
+	// if (
+	// 	sortedResultData.length > 0 &&
+	// 	resultData.length === 0 &&
+	// 	sortedResultData.length !== quizData.length - 1
+	// ) {
+	// 	sortedResultData.push(resultData[resultData.length - 1]);
+	// 	console.log("WORKS");
+	// }
 });
 
 // Event Listener for when the result-button is clicked
