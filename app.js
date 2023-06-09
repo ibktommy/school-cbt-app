@@ -11,8 +11,8 @@ let secondsTag = document.querySelector(".time-seconds");
 
 let timer;
 let clearTimer;
-let minutes = "0o";
-let seconds = 15;
+let minutes = 2;
+let seconds = "01";
 
 let subjectsTabContainer = document.querySelector(".subjects-tab-container");
 let questionContainer = document.querySelector(".question-container");
@@ -161,8 +161,6 @@ function subjectTitleQuestions() {
 	);
 
 	subjectTabButtons.forEach((eachTabButton, index) => {
-		// fetchSubjectsQuestion(index - index); // Calls fetchSubjectsQuestion with an initial argument of 0
-		// fetchQuestionNumbers(0);
 		eachTabButton.addEventListener("click", () => {
 			fetchSubjectsQuestion(index);
 			fetchQuestionNumbers(index);
