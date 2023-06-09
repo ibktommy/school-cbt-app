@@ -21,6 +21,7 @@ let questionNumbersContainer = document.querySelector(
 	".question-number-container",
 );
 
+// Create variables that holds and manages test-scores
 let correctScores = 0;
 let incorrectScores = 0;
 let totalScore = 0;
@@ -37,6 +38,7 @@ let noButton = document.querySelector(".no-btn");
 let testResultContainer = document.querySelector(".test-result-container");
 let resultButton = document.querySelector(".result-btn");
 
+// Create Variables that holds and manages scores for final test-result
 let sortedResultData = [];
 let resultData = [];
 let resultDataObject;
@@ -86,13 +88,6 @@ function startTimer() {
 			// }
 		}
 	}
-
-	// console.log(minutesTag, secondsTag);
-	// if (minutesTag === "00" && secondsTag === "00") {
-	// 	// clearTimer = clearInterval(timer)
-	// 	alert('EXAM HAS ENDED')
-
-	// }
 }
 
 // Fetch subjects Title from Data file
@@ -380,7 +375,6 @@ function optionsSelectionHandler(
 				selectedOptionText !== correctAnswer &&
 				selectedOption.parentElement.classList.contains("reselect") === false
 			) {
-				// console.log("Incorrect answer in the first instance");
 				selectedOption.parentElement.classList.add("selected-wrong");
 				selectedOptionElement.classList.add("incorrect");
 
@@ -497,12 +491,8 @@ function getTotalResultData(resultDataObject, resultData, sortedResultData, quiz
 		resultData.length !== 0 &&
 		resultDataObject !== undefined
 	) {
-		sortedResultData.push(resultData[resultData.length - 1]);
-
-		console.log(resultData);
-		console.log(resultData[resultData.length - 1]);
-		console.log(sortedResultData);
-		return; //The code below dont work when this condition is met
+		sortedResultData.push(resultData[resultData.length - 1])
+		return; //The code below will not work when this condition is met cos of 'return'
 	}
 
 	// Condition that runs when user has not reached the last subject and pushes the recent result-data-object into the sorted-result-array when user submits
