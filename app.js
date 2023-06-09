@@ -537,13 +537,13 @@ function displayTestResult(sortedResultData) {
 
 		resultDetails.append(resultContentHTML);
 
+		// Update cumulativeCorrectScores and cumulativeQuestionNumbers as with each correctScores and totalQuestionNumber
 		cumulativeCorrectScores = cumulativeCorrectScores + correctScores;
 		cumulativeQuestionNumbers = cumulativeQuestionNumbers + totalQuestionNumber;
 		
 	});
 
-	console.log(cumulativeCorrectScores, cumulativeQuestionNumbers);
-
+	// Add cumulativeCorrectScores and cumulativeQuestionNumbers to the webpage HTML
 	let totalNumHTML = document.querySelector(".total-num");
 	let totalPercentageHTML = document.querySelector(".total-percentage");
 
@@ -554,6 +554,7 @@ function displayTestResult(sortedResultData) {
 	).toFixed(1)}%`;
 }
 
+// Event Listener for when user ends the test
 yesButton.addEventListener("click", () => {
 	submitAlertContainer.classList.add("display");
 	testResultContainer.classList.remove("display");
