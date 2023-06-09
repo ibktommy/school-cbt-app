@@ -481,9 +481,26 @@ noButton.addEventListener("click", () => {
 	timer = setInterval(startTimer, 1000);
 });
 
+function getTotalResultData(resultDataObject, resultData, sortedResultData, quizData) {
+	// When user ends exam without selecting answering any questions
+	if (
+		sortedResultData.length === 0 &&
+		resultData.length === 0 &&
+		resultDataObject === undefined
+	) {
+		sortedResultData.push(0);
+	}
+
+	console.log(resultData);
+	console.log(resultData[resultData.length - 1]);
+	console.log(sortedResultData);
+}
+
 yesButton.addEventListener("click", () => {
 	submitAlertContainer.classList.add("display");
 	testResultContainer.classList.remove("display");
+
+	getTotalResultData(resultDataObject, resultData, sortedResultData, quizData)
 });
 
 // Event Listener for when the result-button is clicked
