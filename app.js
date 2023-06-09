@@ -11,8 +11,8 @@ let secondsTag = document.querySelector(".time-seconds");
 
 let timer;
 let clearTimer;
-let minutes = 4;
-let seconds = 59;
+let minutes = "0o";
+let seconds = 15;
 
 let subjectsTabContainer = document.querySelector(".subjects-tab-container");
 let questionContainer = document.querySelector(".question-container");
@@ -83,9 +83,10 @@ function startTimer() {
 		if (seconds === 0) {
 			clearTimer = clearInterval(timer);
 
-			// if (minutesTag.textContent === "00" && secondsTag.textContent === "00") {
-			// 	submitAlertContainer.classList.remove('display')
-			// }
+			if (minutesTag.textContent === "00" && secondsTag.textContent === "00") {
+				// End exam when time is up!
+				endTestHandler();
+			}
 		}
 	}
 }
@@ -143,8 +144,8 @@ function fetchSubjectsTabTitle() {
 				sortedResultData.push(resultData[resultData.length - 1]);
 			}
 
-			resultDataObject = undefined
-			resultData = []
+			resultDataObject = undefined;
+			resultData = [];
 
 			console.log(resultDataObject);
 			console.log(resultData);
@@ -427,7 +428,7 @@ function optionsSelectionHandler(
 				totalScore: totalScore,
 				correctScores: correctScores,
 				incorrectScores: incorrectScores,
-				totalQuestionNumber: subjectQuestionData.length
+				totalQuestionNumber: subjectQuestionData.length,
 			};
 
 			console.log(resultDataObject);
@@ -475,7 +476,12 @@ noButton.addEventListener("click", () => {
 	timer = setInterval(startTimer, 1000);
 });
 
-function getTotalResultData(resultDataObject, resultData, sortedResultData, quizData) {
+function getTotalResultData(
+	resultDataObject,
+	resultData,
+	sortedResultData,
+	quizData,
+) {
 	// When user ends exam without selecting answering any questions
 	if (
 		sortedResultData.length === 0 &&
@@ -491,7 +497,7 @@ function getTotalResultData(resultDataObject, resultData, sortedResultData, quiz
 		resultData.length !== 0 &&
 		resultDataObject !== undefined
 	) {
-		sortedResultData.push(resultData[resultData.length - 1])
+		sortedResultData.push(resultData[resultData.length - 1]);
 		return; //The code below will not work when this condition is met cos of 'return'
 	}
 
@@ -540,7 +546,6 @@ function displayTestResult(sortedResultData) {
 		// Update cumulativeCorrectScores and cumulativeQuestionNumbers as with each correctScores and totalQuestionNumber
 		cumulativeCorrectScores = cumulativeCorrectScores + correctScores;
 		cumulativeQuestionNumbers = cumulativeQuestionNumbers + totalQuestionNumber;
-		
 	});
 
 	// Add cumulativeCorrectScores and cumulativeQuestionNumbers to the webpage HTML
@@ -557,9 +562,13 @@ function displayTestResult(sortedResultData) {
 // Event Listener for when user ends the test
 yesButton.addEventListener("click", () => {
 	submitAlertContainer.classList.add("display");
+	endTestHandler();
+});
+
+function endTestHandler() {
 	testResultContainer.classList.remove("display");
 
-	getTotalResultData(resultDataObject, resultData, sortedResultData, quizData)
+	getTotalResultData(resultDataObject, resultData, sortedResultData, quizData);
 
 	if (sortedResultData[0] === 0) {
 		console.log("Empty");
@@ -573,23 +582,21 @@ yesButton.addEventListener("click", () => {
 
 		testResultContent.innerHTML = `
 				<h1>
-					Dear <b>${username}</b>, you submitted without answering any questions, therefore your test score is 0.
+					Dear <b>${username}</b>, you submitted without answering any questions, therefore your test score is "0".
 				</h1>
 				<p>Thank You!</p>
 				<button class="result-btn">Go back to Login</button>
 			`;
 
-		let resultButton = document.querySelector('.test-result .result-btn')
+		let resultButton = document.querySelector(".test-result .result-btn");
 
 		resultButton.addEventListener("click", () => {
 			window.location.reload();
 		});
-		
 	} else {
 		displayTestResult(sortedResultData);
 	}
-
-});
+}
 
 // Event Listener for when the result-button is clicked
 resultButton.addEventListener("click", () => {
