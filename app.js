@@ -510,6 +510,12 @@ function getTotalResultData(resultDataObject, resultData, sortedResultData, quiz
 }
 
 function displayTestResult(sortedResultData) {
+	let username = document.querySelector('.test-body h1 b').textContent
+	let usernameHTML = document.querySelector(".test-result-welcome");
+
+	usernameHTML.innerHTML = `<b>${username}</b>, here are the final result of the exam`;
+
+	console.log(username)
 	let resultDetails = document.querySelector(".result");
 
 	sortedResultData.forEach((eachResultItem) => {

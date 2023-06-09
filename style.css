@@ -325,10 +325,16 @@ body {
   box-shadow: rgba(0, 0, 0, .24) 0px 3px 8px;
 }
 
-.test-result h4 {
+.test-result-welcome {
   font-size: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  padding: 1rem 0;
   text-align: center;
+   border: .2rem dashed #000;
+}
+
+.test-result-welcome b {
+  text-transform: uppercase;
 }
 
 .result-content {
