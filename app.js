@@ -491,6 +491,20 @@ function getTotalResultData(resultDataObject, resultData, sortedResultData, quiz
 		sortedResultData.push(0);
 	}
 
+	// Condition that updates sortedResultData when user ends exam after treating the last subject
+	if (
+		sortedResultData.length === quizData.length - 1 &&
+		resultData.length !== 0 &&
+		resultDataObject !== undefined
+	) {
+		sortedResultData.push(resultData[resultData.length - 1]);
+
+		console.log(resultData);
+		console.log(resultData[resultData.length - 1]);
+		console.log(sortedResultData);
+		return; //The code below dont work when this condition is met
+	}
+
 	// Condition that runs when user has not reached the last subject and pushes the recent result-data-object into the sorted-result-array when user submits
 	if (
 		sortedResultData.length !== quizData.length - 1 &&
