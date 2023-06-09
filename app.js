@@ -171,7 +171,6 @@ function subjectTitleQuestions() {
 
 function fetchSubjectsQuestion(subjectIndex) {
 	let subjectQuestionData = quizData[subjectIndex].questions;
-	// let subjectQuestionTitle = quizData[subjectIndex].subject.split(" ").join("");
 
 	questionContainer.innerHTML = "";
 
@@ -428,6 +427,7 @@ function optionsSelectionHandler(
 				totalScore: totalScore,
 				correctScores: correctScores,
 				incorrectScores: incorrectScores,
+				totalQuestionNumber: subjectQuestionData.length
 			};
 
 			console.log(resultDataObject);
@@ -509,17 +509,40 @@ function getTotalResultData(resultDataObject, resultData, sortedResultData, quiz
 	console.log(sortedResultData);
 }
 
+// function displayTestResult(sortedResultData) {
+// 	sortedResultData.forEach((eachResultItem) => {
+// 		const { subjectTitle, correctScores, incorrectScores, totalScore } =
+// 			eachResultItem;
+
+// 		let resultHTML = document.createElement("article");
+// 		resultHTML.classList.add("result");
+
+// 		resultHTML.innerHTML = `
+// 					<div class="result-content">
+//           <h5>${subjectTitle}</h5>
+//           <p>
+// 						You scored: <b>${correctScores}/${totalScore}</b>
+// 					</p>
+//           <p>${((correctScores / totalScore) * 100).toFixed(2)}%</p>
+//         </div>`;
+
+// 		testResultContainer.append(resultHTML)
+// 	});
+// }
+
 yesButton.addEventListener("click", () => {
 	submitAlertContainer.classList.add("display");
 	testResultContainer.classList.remove("display");
 
 	getTotalResultData(resultDataObject, resultData, sortedResultData, quizData)
+
+	// displayTestResult(sortedResultData);
 });
 
 // Event Listener for when the result-button is clicked
-resultButton.addEventListener("click", () => {
-	window.location.reload();
-});
+	// resultButton.addEventListener("click", () => {
+	// 	window.location.reload();
+	// });
 
 
 
