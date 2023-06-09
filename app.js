@@ -510,17 +510,16 @@ function getTotalResultData(resultDataObject, resultData, sortedResultData, quiz
 }
 
 function displayTestResult(sortedResultData) {
-	let username = document.querySelector('.test-body h1 b').textContent
+	let username = document.querySelector(".test-body h1 b").textContent;
 	let usernameHTML = document.querySelector(".test-result-welcome");
 
 	usernameHTML.innerHTML = `<b>${username}</b>, here are the final result of the exam`;
 
-	console.log(username)
+	// console.log(username)
 	let resultDetails = document.querySelector(".result");
 
 	sortedResultData.forEach((eachResultItem) => {
-		const { subjectTitle, correctScores, totalQuestionNumber } =
-			eachResultItem;
+		const { subjectTitle, correctScores, totalQuestionNumber } = eachResultItem;
 
 		let resultContentHTML = document.createElement("article");
 		resultContentHTML.classList.add("result-content");
@@ -533,7 +532,7 @@ function displayTestResult(sortedResultData) {
           <p>${((correctScores / totalQuestionNumber) * 100).toFixed(1)}%</p>
 		`;
 
-		resultDetails.append(resultContentHTML)
+		resultDetails.append(resultContentHTML);
 	});
 }
 
@@ -543,7 +542,34 @@ yesButton.addEventListener("click", () => {
 
 	getTotalResultData(resultDataObject, resultData, sortedResultData, quizData)
 
-	displayTestResult(sortedResultData);
+	if (sortedResultData[0] === 0) {
+		console.log("Empty");
+
+		let testResultContent = document.querySelector(".test-result");
+
+		testResultContent.classList.add("special-styles");
+		let username = document.querySelector(".test-body h1 b").textContent;
+
+		testResultContent.innerHTML = "";
+
+		testResultContent.innerHTML = `
+				<h1>
+					Dear <b>${username}</b>, you submitted without answering any questions, therefore your test score is 0.
+				</h1>
+				<p>Thank You!</p>
+				<button class="result-btn">Go back to Login</button>
+			`;
+
+		let resultButton = document.querySelector('.test-result .result-btn')
+
+		resultButton.addEventListener("click", () => {
+			window.location.reload();
+		});
+		
+	} else {
+		displayTestResult(sortedResultData);
+	}
+
 });
 
 // Event Listener for when the result-button is clicked

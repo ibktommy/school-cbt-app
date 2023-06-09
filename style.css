@@ -337,6 +337,20 @@ body {
   text-transform: uppercase;
 }
 
+.test-result.special-styles h1{
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.test-result.special-styles h1 b {
+  text-transform: uppercase;
+}
+.test-result.special-styles p {
+  font-size: 1.6rem;
+  text-align: center;
+  text-decoration: underline;
+}
+
 .result-content {
   border-bottom: .1rem solid #d9d9d9;
   margin-bottom: 2rem;
