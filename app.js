@@ -509,26 +509,27 @@ function getTotalResultData(resultDataObject, resultData, sortedResultData, quiz
 	console.log(sortedResultData);
 }
 
-// function displayTestResult(sortedResultData) {
-// 	sortedResultData.forEach((eachResultItem) => {
-// 		const { subjectTitle, correctScores, incorrectScores, totalScore } =
-// 			eachResultItem;
+function displayTestResult(sortedResultData) {
+	let resultDetails = document.querySelector(".result");
 
-// 		let resultHTML = document.createElement("article");
-// 		resultHTML.classList.add("result");
+	sortedResultData.forEach((eachResultItem) => {
+		const { subjectTitle, correctScores, totalQuestionNumber } =
+			eachResultItem;
 
-// 		resultHTML.innerHTML = `
-// 					<div class="result-content">
-//           <h5>${subjectTitle}</h5>
-//           <p>
-// 						You scored: <b>${correctScores}/${totalScore}</b>
-// 					</p>
-//           <p>${((correctScores / totalScore) * 100).toFixed(2)}%</p>
-//         </div>`;
+		let resultContentHTML = document.createElement("article");
+		resultContentHTML.classList.add("result-content");
 
-// 		testResultContainer.append(resultHTML)
-// 	});
-// }
+		resultContentHTML.innerHTML = `
+          <h5>${subjectTitle}</h5>
+          <p>
+						You scored: <b>${correctScores}/${totalQuestionNumber}</b>
+					</p>
+          <p>${((correctScores / totalQuestionNumber) * 100).toFixed(1)}%</p>
+		`;
+
+		resultDetails.append(resultContentHTML)
+	});
+}
 
 yesButton.addEventListener("click", () => {
 	submitAlertContainer.classList.add("display");
@@ -536,13 +537,13 @@ yesButton.addEventListener("click", () => {
 
 	getTotalResultData(resultDataObject, resultData, sortedResultData, quizData)
 
-	// displayTestResult(sortedResultData);
+	displayTestResult(sortedResultData);
 });
 
 // Event Listener for when the result-button is clicked
-	// resultButton.addEventListener("click", () => {
-	// 	window.location.reload();
-	// });
+resultButton.addEventListener("click", () => {
+	window.location.reload();
+});
 
 
 
