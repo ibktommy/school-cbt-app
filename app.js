@@ -518,6 +518,9 @@ function displayTestResult(sortedResultData) {
 	// console.log(username)
 	let resultDetails = document.querySelector(".result");
 
+	let cumulativeCorrectScores = 0;
+	let cumulativeQuestionNumbers = 0;
+
 	sortedResultData.forEach((eachResultItem) => {
 		const { subjectTitle, correctScores, totalQuestionNumber } = eachResultItem;
 
@@ -533,7 +536,22 @@ function displayTestResult(sortedResultData) {
 		`;
 
 		resultDetails.append(resultContentHTML);
+
+		cumulativeCorrectScores = cumulativeCorrectScores + correctScores;
+		cumulativeQuestionNumbers = cumulativeQuestionNumbers + totalQuestionNumber;
+		
 	});
+
+	console.log(cumulativeCorrectScores, cumulativeQuestionNumbers);
+
+	let totalNumHTML = document.querySelector(".total-num");
+	let totalPercentageHTML = document.querySelector(".total-percentage");
+
+	totalNumHTML.innerHTML = `${cumulativeCorrectScores}/${cumulativeQuestionNumbers}`;
+	totalPercentageHTML.innerHTML = `${(
+		(cumulativeCorrectScores / cumulativeQuestionNumbers) *
+		100
+	).toFixed(1)}%`;
 }
 
 yesButton.addEventListener("click", () => {
