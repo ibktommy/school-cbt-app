@@ -11,8 +11,8 @@ let secondsTag = document.querySelector(".time-seconds");
 
 let timer;
 let clearTimer;
-let minutes = 2;
-let seconds = "01";
+let minutes = 4;
+let seconds = "59";
 
 let subjectsTabContainer = document.querySelector(".subjects-tab-container");
 let questionContainer = document.querySelector(".question-container");
@@ -55,7 +55,7 @@ formBtn.addEventListener("click", (e) => {
 	form.classList.add("hidden");
 
 	testBody.classList.remove("hidden");
-	welcomeNote.innerHTML = `Hello there, <b>${usernameValue}</b>.<br> Welcome to Computer Based Test App`;
+	welcomeNote.innerHTML = `Welcome <b>${usernameValue}</b>`;
 	username.value = "";
 
 	fetchSubjectsTabTitle();
@@ -184,7 +184,7 @@ function fetchSubjectsQuestion(subjectIndex) {
 		questionContentHTML.innerHTML = `
 			<article class="question">
 				<div class='question-details'>
-					<p>Q. [${id}]</p>
+					<p>Q.[${id}]</p>
 					<p>${question}</p>
 				</div>
 

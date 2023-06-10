@@ -29,17 +29,42 @@
     </form>
 
     <div class="test-body hidden">
-      <h1 class="welcome"></h1>
+      <div class="test-body-content">
+        <h1 class="welcome"></h1>
+        <h3 class="instruction">
+          read the following instructions before you begin the exam
+        </h3>
+        <div class="instruction-list">
+          <p>
+            (1) Your time will not start until you select a subject
+          </p>
+          <p>
+            (2) When you select a “subject”, click on a “question-number” to display your questions
+          </p>
+          <p>
+            (3) When you select a “subject”, other subjects will be disabled till you have answered all questions in the selected subject
+          </p>
+          <p>
+            (4) The submit button will not be active till you have select a subject
+          </p>
+          <p>
+            (5) When you click the “submit-button”, a prompt will ask to confirm if you are sure to end the test
+          </p>
+        </div>
+      </div>
+      
       <div class="time-box">
-        <span class="time-minutes">02</span>
+        <span class="time-minutes">04</span>
         <span>:</span>
-        <span class="time-seconds">01</span>
+        <span class="time-seconds">59</span>
       </div>
 
-      <div class="subjects-tab-container"></div>
+      <div class="question-box">
+        <div class="question-container"></div>
+        <div class="subjects-tab-container"></div>
 
-      <div class="question-container"></div>
-
+      </div>
+      
       <div class="question-number-container"> </div>
 
       <button class="submit-btn">Click to submit</button>
