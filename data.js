@@ -82,7 +82,7 @@
 					question: "Trypanosomiasis is transmitted by?",
 					optionA: "Mosquitoes",
 					optionB: "Glossina",
-					optionC: "Husefly",
+					optionC: "Housefly",
 					optionD: "All of the above",
 					correctAnswer: "Glossina",
 				},
