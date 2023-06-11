@@ -1,5 +1,5 @@
 /* SMARTPHONE 700px*/
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1000px) {
   body {
     background: #fff;
   }
@@ -59,25 +59,27 @@
     font-size: 2rem;
   }
 
-  .test-body-content {
-    display: flex;
+  .test-body {
     flex-direction: column;
-    align-items: center;
-    background: var(--pry-color);
-    padding: 1.5rem 1rem;
-    color: var(--white);
+  }
+
+  .test-body {
+    padding-bottom: 3rem;
+  }
+
+  .test-body-content {
+    width: 100%;
+    /* justify-content: flex-start; */
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   .welcome {
-    font-family: var(--cormorant-font);
     font-size: 3rem;
   }
 
-  .welcome b {
-    font-family: var(--acme-font);
-  }
-
   .test-body-quiz {
+    width: 100%;
     background-image: url(./assets/bg-image.png);
     background-position: center;
     background-size: 100%;
@@ -86,64 +88,31 @@
 
   .instruction {
     margin: 1.5rem 0 3rem 0;
-    text-transform: uppercase;
-    font-family: var(--acme-font);
-    font-size: 1.5rem;
-    text-align: center;
-    background: var(--sec-color);
-    padding: 1.2rem;
-    font-weight: bold;
-    letter-spacing: .1rem;
   }
 
   .instruction-list p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     font-size: 1.4rem;
     width: 95%;
-    padding-bottom: .4rem;
-    border-bottom: .1rem solid var(--grey-color);
-    line-height: 2.32rem;
-  }
-
-  .instruction-list p:last-child {
-    border: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
-
-  .time-box {
-    background: var(--sec-color);
-    border-radius: .5rem;
-    margin-left: 1.5rem;
-  }
-
-  .time-box span {
-    font-family: var(--heebo-font);
-    font-weight: 600;
-    font-size: 2.5rem;
+    line-height: 2.3rem;
   }
 
   .question-box {
-    padding: 0 1.5rem;
-    width: 100%;
-    display: flex;
     flex-direction: column-reverse;
     align-items: flex-start;
     justify-content: center;
+    width: 100%;
   }
 
   .subjects-tab-container {
     width: 80%;
-    min-height: max-content;
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
     margin-bottom: 2rem;
   }
 
   .question-container {
     width: 100%;
     /* min-height: 25vh; */
+    margin-right: 0;
     border: 0;
     box-shadow: var(--shadow);
   }

@@ -210,6 +210,7 @@ function fetchSubjectsQuestion(subjectIndex) {
 		`;
 
 		questionContainer.append(questionContentHTML);
+		questionContainer.classList.remove("hidden");
 	});
 }
 
