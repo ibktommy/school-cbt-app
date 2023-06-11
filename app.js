@@ -579,9 +579,9 @@ function endTestHandler() {
 		testResultContent.innerHTML = "";
 
 		testResultContent.innerHTML = `
-				<h1>
+				<h5>
 					Dear <b>${username}</b>, you submitted without answering any questions, therefore your test score is "0".
-				</h1>
+				</h5>
 				<p>Thank You!</p>
 				<button class="result-btn">Go back to Login</button>
 			`;
