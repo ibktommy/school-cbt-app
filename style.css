@@ -45,6 +45,10 @@ body {
   flex-direction: column;
   gap: 1.5rem;
   align-items: flex-start;
+  background-image: url(./assets/bg-image.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
 }
 
 .form-btn {
@@ -59,6 +63,15 @@ body {
 
 .test-body.hidden {
   display: none;
+}
+
+.test-body-quiz {
+  display: flex;
+  flex-direction: column;
+  background-image: url(./assets/bg-image.png);
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .welcome {
@@ -494,6 +507,7 @@ body {
 
 .form-input input {
   width: 100%;
+  background: none;
   border: 0;
   border-bottom: .1rem solid var(--grey-color);
   padding-bottom: .8rem;
